@@ -1,6 +1,7 @@
 import axios from "axios";
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { BASE_URL } from "../utils/constants";
 
 const GetStarted = () => {
   const [emailId, setEmailId] = useState();
@@ -10,7 +11,7 @@ const GetStarted = () => {
   const handleGetStarted = async () => {
     if(!emailId) setErrorMessage(true)
     const isUserLogin = await axios.post(
-      "http://localhost:3000/status",
+      BASE_URL +  "/status",
       { emailId },
       { withCredentials: true }
     );

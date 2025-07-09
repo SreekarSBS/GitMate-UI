@@ -1,14 +1,19 @@
 import { useSelector } from "react-redux";
+import {  Link, useLocation, useNavigate } from "react-router-dom";
 
 
 const Navbar = () => {
+ const navigate = useNavigate()
+ const location = useLocation()
+
+
  
   const user = useSelector((store) => store.user)   
   console.log(user);
   
     return <div data-theme = "night" className="navbar bg-base-300  border-b border-b-cyan-500/55 rounded-2xl shadow-2xl ">
     <div className="flex-1 ">
-    <a class="btn btn-ghost h-26 text-4xl">
+    <a  class="btn btn-ghost h-26 text-5xl">
       
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86" height="80" preserveAspectRatio="xMinYMin meet" viewBox="0 0 256 259.3" id="github">
   <path fill="#9EDCF2" d="M200.9 199.8c0 13.9-32.2 25.1-71.9 25.1s-71.9-11.3-71.9-25.1c0-13.9 32.2-25.1 71.9-25.1s71.9 11.2 71.9 25.1zm0 0"></path>
@@ -34,7 +39,7 @@ const Navbar = () => {
     
 
       </div>
-     
+     {location.pathname === "/auth" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info w-28">Sign In</button>}
   {user && <div className="flex items-center"> <p className="mr-2 font-extralight font-stretch-200%">{user.message}</p> <div className="flex gap-2">
   
       <div className="dropdown dropdown-end">
@@ -49,12 +54,12 @@ const Navbar = () => {
           tabIndex={0}
           className="menu menu-sm dropdown-content bg-base-100 rounded-box z-1 mt-3 w-52 p-2 shadow">
           <li>
-            <a className="justify-between">
+            <Link to = "/profile" className="justify-between">
               Profile
               <span className="badge">New</span>
-            </a>
+            </Link>
           </li>
-          <li><a>Settings</a></li>
+          <li><a >Settings</a></li>
           <li><a>Logout</a></li>
         </ul>
       </div>

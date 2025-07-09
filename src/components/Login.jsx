@@ -1,16 +1,17 @@
 import React, { useState } from "react";
 import axios from "axios";
 import { useDispatch } from "react-redux";
-import { addUser } from "./utils/userSlice";
+import { addUser } from "../utils/userSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 const Login = () => {
  
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
   const location = useLocation();
-  const [emailId, setEmailId] = useState(location.state.emailId);
+  const [emailId, setEmailId] = useState(location.state.emailId || "");
   const dispatch = useDispatch();
-  
+ 
+ 
   const handleLogIn = async () => {
     try {
       const res = await axios.post("http://localhost:3000/login", {
@@ -19,7 +20,7 @@ const Login = () => {
       },{withCredentials : true});
       console.log(res.data);
       dispatch(addUser(res.data))
-      navigate("/feed")
+      navigate("/")
     } catch (res) {
       console.log("Failed to Log In :" + res);
     }
@@ -54,7 +55,7 @@ const Login = () => {
 
               <input
                
-                value={emailId}
+                value={location.state.emailId || emailId}
                 
                 onChange={(e) => setEmailId(e.target.value)}
                 type="email"
