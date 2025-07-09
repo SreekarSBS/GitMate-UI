@@ -4,9 +4,11 @@ import { useNavigate } from "react-router-dom";
 
 const GetStarted = () => {
   const [emailId, setEmailId] = useState();
+  const [errorMessage,setErrorMessage] = useState(false)
     const navigate = useNavigate()
 
   const handleGetStarted = async () => {
+    if(!emailId) setErrorMessage(true)
     const isUserLogin = await axios.post(
       "http://localhost:3000/status",
       { emailId },
@@ -44,12 +46,14 @@ const GetStarted = () => {
               <span>EmailId</span>
             </label>
             <button
-              onClick={handleGetStarted}
+              onClick={() =>handleGetStarted()}
               className="btn btn-primary ml-4 "
             >
               <span></span>Get Started
             </button>
+            
           </div>
+          {errorMessage && <p className="mt-4 text-lg font-semibold text-red-400 ">Please Enter a valid EmailID</p>}
         </div>
       </div>
     </div>
