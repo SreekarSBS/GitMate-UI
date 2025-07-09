@@ -1,16 +1,23 @@
 import React, { useState } from "react";
 import axios from "axios";
+import { useDispatch } from "react-redux";
+import { addUser } from "./utils/userSlice";
+import { useLocation } from "react-router-dom";
 const Login = () => {
-  const [emailId, setEmailId] = useState("zuck@gmail.com");
-  const [password, setPassword] = useState("Mark@123");
+ 
+  const [password, setPassword] = useState("");
 
+  const location = useLocation();
+  const [emailId, setEmailId] = useState(location.state.emailId);
+  const dispatch = useDispatch();
   const handleLogIn = async () => {
     try {
       const res = await axios.post("http://localhost:3000/login", {
         emailId,
         password,
       },{withCredentials : true});
-      console.log(res);
+      console.log(res.data);
+      dispatch(addUser(res.data))
     } catch (res) {
       console.log("Failed to Log In :" + res);
     }
@@ -44,7 +51,9 @@ const Login = () => {
               </svg>
 
               <input
+               
                 value={emailId}
+                
                 onChange={(e) => setEmailId(e.target.value)}
                 type="email"
                 placeholder="mail@site.com"
