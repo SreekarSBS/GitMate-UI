@@ -8,6 +8,7 @@ const Login = () => {
   const [password, setPassword] = useState("");
   const navigate = useNavigate()
   const location = useLocation();
+  const [error,setError] = useState();
   const [emailId, setEmailId] = useState(location.state.emailId || "");
   const dispatch = useDispatch();
  
@@ -18,11 +19,18 @@ const Login = () => {
         emailId,
         password,
       },{withCredentials : true});
+      if(!res.data) throw new Error ("Enter Valid Credentials")
+      
       console.log(res.data);
       dispatch(addUser(res.data))
-      navigate("/")
-    } catch (res) {
-      console.log("Failed to Log In :" + res);
+      return navigate("/")
+        
+    } catch (err) {
+      console.log(err)
+      setError(err.response?.data?.message || "Enter valid credentials");
+
+      console.log("Failed to Log In :" + err);
+      
     }
   };
 
@@ -55,7 +63,7 @@ const Login = () => {
 
               <input
                
-                value={location.state.emailId || emailId}
+                value={ emailId}
                 
                 onChange={(e) => setEmailId(e.target.value)}
                 type="email"
@@ -97,7 +105,7 @@ const Login = () => {
               />
             </label>
             <div className="validator-hint hidden">
-              Enter valid email address
+             { error}
             </div>
           </div>
           <div className="card-actions justify-end">

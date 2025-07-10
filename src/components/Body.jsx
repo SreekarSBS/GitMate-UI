@@ -11,15 +11,14 @@ import { addUser } from "../utils/userSlice";
 const Body = () => {
   const navigate = useNavigate()
   const dispatch = useDispatch()
- const location = useLocation()
+  const location = useLocation()
   const userData = useSelector((store) => store.user)
 
-
   const fetchUser = async () => {
-    if(userData) return
+    
     try {
  
-    const res = await axios.get(BASE_URL + "/profile/view",{withCredentials : true});
+    const res = await axios.get(BASE_URL + "/profile/view",{},{withCredentials : true});
     dispatch(addUser(res.data.data))
      
     console.log(res);
@@ -35,6 +34,13 @@ const Body = () => {
    
     fetchUser();
   }, []);
+
+  useEffect(() => {
+    if (userData && location.pathname === "/auth") {
+      navigate("/", { replace: true });
+    }
+   
+  }, [userData, location.pathname]);
 
 
   return (
