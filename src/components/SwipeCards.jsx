@@ -4,7 +4,7 @@ import { useEffect, useState } from "react";
 
 const SwipeCards = ({ cardData }) => {
   const [cards, setCards] = useState(cardData || []);
-  
+ 
   return (
     <div
       className="grid h-[80vh] w-screen place-items-center select-none"
@@ -32,7 +32,7 @@ const SwipeCards = ({ cardData }) => {
 };
 
 
-const Card = ({ _id, photoURL, firstName, lastName, gender, setCards, cards }) => {
+const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , skills , age,  setCards, cards }) => {
   const x = useMotionValue(0);
   const rotateRaw = useTransform(x, [-150, 150], [-18, 18]);
   const opacity = useTransform(x, [-150, 0, 150], [0, 1, 0]);
@@ -78,7 +78,7 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, setCards, cards }) =
   return (
     <motion.div
       className={`
-        w-80 md:w-96 h-[75%] transition-all duration-0 ease-in-out
+        w-80 md:w-1/4 h-[75%] xl:h-[95%] transition-all duration-0 ease-in-out
 
         ${cardColor} 
         rounded-xl shadow-2xl overflow-hidden 
@@ -96,19 +96,23 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, setCards, cards }) =
       dragConstraints={{ left: 0, right: 0 }}
       onDragEnd={handleDragEnd}
     >
-      <img
+      <img 
         src={
           photoURL ||
-          "https://t3.ftcdn.net/jpg/07/24/59/76/360_F_724597608_pmo5BsVumFcFyHJKlASG2Y2KpkkfiYUU.jpg"
+          ""
         }
         alt={`${firstName}'s photo`}
-        className="w-full h-2/3 object-cover bg-"
+        className="w-full  h-1/2  2xl:h-2/3 object-cover bg-"
       />
-      <div className="p-4 text-black text-center flex-1 mx-12 mb-12 rounded-4xl bg-amber-50 ">
-        <h3 className="font-semibold  text-4xl">
+      <div className="2xl:p-4 px-6  md:pt-8 text-black overflow-y-scroll  flex-1 mx-4 xl:mx-8 my-4  rounded-4xl border-t-1 border-b-8 border-l-1 border-r-1 border-b-gray-950 ">
+        <h3 className="text-gray-300 text-2xl xl:text-3xl font-light first-letter:font-bold first-letter:text-blue-600">
           {firstName} {lastName || ""}
         </h3>
-        <p className="text-sm text-gray-600">Gender: {gender}</p>
+        <p className=" text-gray-800 xl:text-lg font-light"><span className="font-bold">Gender</span>: {gender}</p>
+        <p className=" text-gray-800 xl:text-lg font-light"><span className="font-bold">Age</span>: {age}</p>
+        <p className=" text-gray-800 xl:text-lg font-light"><span className="overflow-hidden font-bold">Skills</span>: {skills.join(" , ")}</p>
+        <p className=" text-gray-800 xl:text-lg font-light"><span className="font-bold">Location</span>: {location}</p>
+        <p className=" text-gray-800 xl:text-lg font-light"><span className="font-bold">About</span>: {about}</p>
       </div>
     </motion.div>
   );
