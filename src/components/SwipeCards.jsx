@@ -1,9 +1,10 @@
-import React from "react";
+
 import { motion, useMotionValue, useTransform } from "framer-motion";
+import { useEffect, useState } from "react";
 
 const SwipeCards = ({ cardData }) => {
-  const [cards, setCards] = React.useState(cardData || []);
-
+  const [cards, setCards] = useState(cardData || []);
+  
   return (
     <div
       className="grid h-[80vh] w-screen place-items-center select-none"
@@ -42,19 +43,47 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, setCards, cards }) =
     return `${rotateRaw.get() + offset}deg`;
   });
 
-  const handleDragEnd = () => {
-    if (Math.abs(x.get()) > 100) {
-      // Optional: Call API based on direction
-      // if (x.get() > 100) axios.post("/interested", {_id})
-      // else axios.post("/ignored", {_id})
+  const [isInterested, setIsInterested] = useState(null);
 
+  // 🔄 update on motion value change
+  useEffect(() => {
+    const unsubscribe = x.on("change", (latest) => {
+      if (latest > 0) {
+        setIsInterested(true);
+      } else if (latest < 0) {
+        setIsInterested(false);
+      } else {
+        setIsInterested(null);
+      }
+    });
+  
+    return () => unsubscribe();
+  }, [x]);
+  
+
+  const handleDragEnd = async () => {
+    const direction = x.get();
+    if (Math.abs(direction) > 0) {
       setCards((prev) => prev.filter((v) => v._id !== _id));
     }
+   
   };
+
+  const cardColor = isInterested === true
+    ? "bg-gradient-to-r from-emerald-400 to-green-500 "
+    : isInterested === false
+    ? "bg-red-600"
+    : "bg-gradient-to-r from-cyan-400 to-blue-500";
 
   return (
     <motion.div
-      className="h-3/4 w-1/5 bg-blue-600 rounded-xl shadow-lg overflow-hidden relative flex flex-col"
+      className={`
+        w-80 md:w-96 h-[75%] transition-all duration-0 ease-in-out
+
+        ${cardColor} 
+        rounded-xl shadow-2xl overflow-hidden 
+        relative flex flex-col transition-colors duration-300
+      `}
       style={{
         gridRow: 1,
         gridColumn: 1,
@@ -68,18 +97,23 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, setCards, cards }) =
       onDragEnd={handleDragEnd}
     >
       <img
-        src={photoURL || "https://t3.ftcdn.net/jpg/07/24/59/76/360_F_724597608_pmo5BsVumFcFyHJKlASG2Y2KpkkfiYUU.jpg"}
+        src={
+          photoURL ||
+          "https://t3.ftcdn.net/jpg/07/24/59/76/360_F_724597608_pmo5BsVumFcFyHJKlASG2Y2KpkkfiYUU.jpg"
+        }
         alt={`${firstName}'s photo`}
-        className="w-full h-2/3 object-cover"
+        className="w-full h-2/3 object-cover bg-"
       />
-      <div className="p-3 text-black flex-1">
-        <h3 className="font-bold text-lg">{firstName} {lastName || ""}</h3>
-         <p className="text-sm text-gray-600">Gender: {gender}</p>
-         <p></p>
+      <div className="p-4 text-black text-center flex-1 mx-12 mb-12 rounded-4xl bg-amber-50 ">
+        <h3 className="font-semibold  text-4xl">
+          {firstName} {lastName || ""}
+        </h3>
+        <p className="text-sm text-gray-600">Gender: {gender}</p>
       </div>
     </motion.div>
   );
 };
+
 
 
 export default SwipeCards;
