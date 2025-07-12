@@ -6,7 +6,8 @@ import { useLocation } from 'react-router-dom';
 const Profile = () => {
   const user = useSelector((store) => store.user);
   const location = useLocation()
-  if(location.pathname == "/profile")
+  // get the data on
+  if(location.pathname == "/profile") 
   return user && (
     <div className='m-6'>
   

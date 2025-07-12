@@ -15,10 +15,10 @@ const PhoneCard = ({ user }) => {
   <img
           src={photoURL || ""}
           alt={`${firstName}'s photo`}
-          className="w-full h-1/2 object-cover"
+          className="w-full h-2/3 object-cover"
         />
       <div className="p-2 sm:p-4 overflow-y-auto text-xs sm:text-lg text-black flex-1">
-          <h3 className="text-xl sm:text-4xl font-light text-blue-600 mb-1">
+          <h3 className="text-xl sm:text-4xl font-extralight  text-blue-600 mb-1">
             {firstName} {lastName || ""}
           </h3>
           <p><span className="font-bold">Gender:</span> {gender}</p>
@@ -27,6 +27,7 @@ const PhoneCard = ({ user }) => {
           <p><span className="font-bold">Location:</span> {location}</p>
           <p><span className="font-bold">About:</span> {about}</p>
         </div>
+        
       </div>
     );
   };
