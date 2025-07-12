@@ -1,8 +1,6 @@
-import React, { useState } from "react";
-import { Button, Form, Input, InputNumber } from "antd";
-
-import Card from "./Card"
-
+import { useState } from "react";
+import Card from "./Card";
+import PhoneCard from "./PhoneCard";
 
 const EditProfile = ({user}) => {
     
@@ -19,7 +17,8 @@ const EditProfile = ({user}) => {
 
   return (
     <div className="flex justify-center">
-      <div className="mockup-code bg-primary-content w-2/4 m-16 p-6 ">
+      <div className="mockup-code bg-primary-content w-full lg:w-2/3 p-4 lg:p-6 m-2 lg:m-10">
+
         <pre data-prefix="$">
           <code>
             <span className="text-sm">FirstName :</span>
@@ -28,7 +27,7 @@ const EditProfile = ({user}) => {
               onChange={(e) => setFormData({...formData , firstName: e.target.value})}
               type="text"
               placeholder="Info"
-              className="m-6 text-green-600 input input-info"
+              className="m-6    text-green-600 input input-info"
             />
           </code>
         </pre>
@@ -105,14 +104,15 @@ const EditProfile = ({user}) => {
           </code>
         </pre>
       </div>
-      <div className="mockup-phone">
-        <div className="mockup-phone-camera"></div>
-        <div className="mockup-phone-display text-white grid place-content-center">
-            <div className="w-44 h-44 bg-red-600">
-    
-            </div>
-            </div>
-      </div>
+      <div className="hidden lg:block mockup-phone">
+  <div className="mockup-phone-camera"></div>
+  <div className="mockup-phone-display flex  justify-center p-2">
+    <div className="w-full h-[70%]   overflow-hidden">
+      <PhoneCard user={formData} />
+    </div>
+  </div>
+</div>
+
     </div>
   );
 };

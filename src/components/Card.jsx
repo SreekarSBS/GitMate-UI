@@ -70,7 +70,7 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , s
             ""
           }
           alt={`${firstName}'s photo`}
-          className="w-full  h-1/2  2xl:h-2/3 object-cover bg-"
+          className="w-full  h-1/2  2xl:h-2/3 object-cover "
         />
         <div className="2xl:p-4 px-6   md:pt-8 text-black overflow-y-scroll  flex-1 mx-4 xl:mx-8 my-2  rounded-4xl border-t-1 border-b-8 border-l-1 border-r-1 border-b-gray-950 ">
           <h3 className="text-gray-300 text-2xl xl:text-3xl font-light first-letter:font-bold first-letter:text-blue-600">

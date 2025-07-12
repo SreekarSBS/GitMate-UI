@@ -8,8 +8,8 @@ const Profile = () => {
   const location = useLocation()
   if(location.pathname == "/profile")
   return user && (
-    <div>
-      Profile
+    <div className='m-6'>
+  
       <EditProfile user = {user} />
     </div>
   )
