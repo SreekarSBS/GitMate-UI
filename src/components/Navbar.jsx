@@ -60,7 +60,7 @@ const Navbar = () => {
           <div className="w-10 rounded-full">
             <img
               alt="Tailwind CSS Navbar component"
-              src="https://www.webwise.ie/wp-content/uploads/2020/12/IMG1207.jpg" />
+              src={user.photoURL || "https://www.webwise.ie/wp-content/uploads/2020/12/IMG1207.jpg"} />
           </div>
         </div>
         <ul
