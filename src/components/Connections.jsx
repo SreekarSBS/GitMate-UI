@@ -8,9 +8,9 @@ import { addConnection } from "../utils/connectionSlice";
 
 const Connections = () => {
   const dispatch = useDispatch();
-  const user = useSelector((store) => store.user)
-   const [errorMessage,setErrorMessage] = useState("No connections found for the user: " + user.firstName);
-    const [isEmpty,setIsEmpty] = useState(true);
+
+   const [errorMessage,setErrorMessage] = useState("No connections found for the user " );
+   
   const connection = useSelector((store) => store.connection)
   
   useEffect(() => {
@@ -24,15 +24,15 @@ const Connections = () => {
     });
     
     dispatch(addConnection(res?.data?.data))
-    setIsEmpty(false)
-    // console.log(res?.data?.data);
+   
+     console.log(res?.data?.data);
   }catch(err){
     // console.log(err.message);
     setErrorMessage(err.response.data.message)
-    setIsEmpty(true)
+    
   }
   };
-// console.log(connection);
+ console.log(connection);
 
   if(!connection) return <div className="flex justify-center mt-20">  <div role="alert" className="alert alert-warning flex ">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="h-6 w-6 shrink-0 stroke-current">
@@ -42,17 +42,17 @@ const Connections = () => {
   </div>
   </div> 
   
-  connection.length === 0 && <h1>No connections yet</h1>
+  if(connection.length === 0) return <h1>No connections yet</h1>
   return <div className="flex justify-center mt-18">
   
    <ul className="list bg-base-100 w-3/5 rounded-box shadow-md">
     
-  <li className="p-4 pb-2 text-3xl rounded-4xl bg-gradient-to-tr from-cyan-600 to-fuchsia-500 text-amber-50 text-center m-4 font-stretch-150% tracking-wide font-extralight">Connections</li>
+  <li className="p-4 mb-6 pb-2 text-3xl rounded-4xl bg-gradient-to-tr from-cyan-600 to-fuchsia-500 text-amber-50 text-center m-4 font-stretch-150% tracking-wide font-extralight">Connections</li>
  
   {connection.map((item,id) => {
     
     return (
-      <li key = {item.id} className="list-row border border-b-base-100 ">
+      <li key = {item.id} className={`list-row h-30  ${id === connection.length-1 ? "border-b-2 border-b-cyan-600 border-l-4 border-l-cyan-600" : "border-b-4 border-b-cyan-600  border-l-4 border-l-cyan-600"}  `}>
     <div className="text-4xl font-thin opacity-30 tabular-nums">0{id+1}</div>
     <div><img className="size-20 rounded-full" src={item.photoURL}/></div>
     <div className="list-col-grow lg:text-xl xl:text-2xl">
