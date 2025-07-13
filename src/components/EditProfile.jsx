@@ -11,6 +11,8 @@ const EditProfile = ({user}) => {
     const [showToast,SetShowToast] = useState(false);
     const [errorMessage,SetErrorMessage] = useState();
     const dispatch = useDispatch()
+    console.log(user);
+    
   const [formData, setFormData] = useState({
     firstName : user.firstName,
     lastName : user.lastName,

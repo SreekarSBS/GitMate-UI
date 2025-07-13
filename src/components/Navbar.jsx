@@ -3,6 +3,7 @@ import {  Link, useLocation, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import { removeUser } from "../utils/userSlice";
+import { removeFeed } from "../utils/feedSlice";
 
 
 const Navbar = () => {
@@ -13,6 +14,7 @@ const Navbar = () => {
   try{
     await axios.post(BASE_URL + "/logout",{},{withCredentials : true}) 
     dispatch(removeUser())
+    dispatch(removeFeed())
     navigate("/auth")
   }
   catch(err){
@@ -69,6 +71,18 @@ const Navbar = () => {
           <li>
             <Link to = "/profile" className="justify-between">
               Profile
+              <span className="badge">New</span>
+            </Link>
+          </li>
+          <li>
+            <Link to = "/connections" className="justify-between">
+              Connections
+              <span className="badge">New</span>
+            </Link>
+          </li>
+          <li>
+            <Link to = "/requests" className="justify-between">
+              Requests
               <span className="badge">New</span>
             </Link>
           </li>
