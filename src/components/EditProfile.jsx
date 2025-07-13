@@ -7,6 +7,7 @@ import Toast from "./Toast";
 import { addUser } from "../utils/userSlice";
 
 const EditProfile = ({user}) => {
+ 
     const [isError,SetIsError] = useState(false);
     const [showToast,SetShowToast] = useState(false);
     const [errorMessage,SetErrorMessage] = useState();
@@ -14,15 +15,17 @@ const EditProfile = ({user}) => {
     console.log(user);
     
   const [formData, setFormData] = useState({
-    firstName : user.firstName,
-    lastName : user.lastName,
-    gender : user.gender,
-    age : user.age,
-    skills : user.skills,
-    location : user.location,
-    about : user.about,
-    photoURL : user.photoURL
+    firstName : user?.firstName,
+    lastName :  user?.lastName,
+    gender :  user?.gender,
+    age :  user?.age,
+    skills :  user?.skills,
+    location :  user?.location,
+    about :  user?.about,
+    photoURL :  user?.photoURL
 });
+
+
   
 const saveProfile = async() => {
   try {
@@ -33,6 +36,7 @@ const saveProfile = async() => {
     withCredentials : true,
 
   },)
+  
   
   dispatch(addUser(res.data))
   console.log(res);

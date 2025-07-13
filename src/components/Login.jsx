@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import axios from "axios";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 const Login = () => {
@@ -12,6 +12,8 @@ const Login = () => {
   const [emailId, setEmailId] = useState(location.state.emailId || "");
   const dispatch = useDispatch();
  
+  
+ 
  
   const handleLogIn = async () => {
     try {
@@ -22,7 +24,7 @@ const Login = () => {
       if(!res.data) throw new Error ("Enter Valid Credentials")
       
       console.log(res.data);
-      dispatch(addUser(res.data))
+      dispatch(addUser(res.data.data))
       return navigate("/")
         
     } catch (err) {
@@ -99,7 +101,8 @@ const Login = () => {
                 onChange={(e) => setPassword(e.target.value)}
                 required
                 placeholder="Password"
-                minlength="8"
+                minLength={8}
+                
                 pattern="(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{8,}"
                 title="Must be more than 8 characters, including number, lowercase letter, uppercase letter"
               />

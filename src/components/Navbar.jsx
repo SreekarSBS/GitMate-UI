@@ -10,6 +10,8 @@ const Navbar = () => {
  const navigate = useNavigate()
  const location = useLocation()
  const dispatch = useDispatch()
+ const user = useSelector((store) => store.user)   
+  console.log(user);
   const handleLogout = async() => {
   try{
     await axios.post(BASE_URL + "/logout",{},{withCredentials : true}) 
@@ -23,12 +25,15 @@ const Navbar = () => {
   }
   }
  
-  const user = useSelector((store) => store.user)   
-  console.log(user);
+  const feedRedirect  = () => {
+    const disAllow = ["/auth" , "/login" , "/signup" ]
+    if(!disAllow.includes(location.pathname)) navigate("/");
+  }
+  
   
     return <div data-theme = "night" className="navbar bg-base-300  border-b border-b-cyan-500/55 rounded-2xl shadow-2xl ">
     <div className="flex-1 ">
-    <a  class="btn btn-ghost h-26 text-5xl">
+    <a onClick={feedRedirect}  class="btn btn-ghost h-26 text-5xl">
       
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86" height="80" preserveAspectRatio="xMinYMin meet" viewBox="0 0 256 259.3" id="github">
   <path fill="#9EDCF2" d="M200.9 199.8c0 13.9-32.2 25.1-71.9 25.1s-71.9-11.3-71.9-25.1c0-13.9 32.2-25.1 71.9-25.1s71.9 11.2 71.9 25.1zm0 0"></path>
@@ -55,7 +60,10 @@ const Navbar = () => {
 
       </div>
      {location.pathname === "/auth" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info w-28">Sign In</button>}
-  {user && <div className="flex items-center"> <p className="mr-2 font-extralight font-stretch-200%">{user.message}</p> <div className="flex gap-2">
+  {user && <div className="flex items-center"> 
+  
+    <p className="m-4 text-blue-500 text-xl font-extralight font-stretch-200%">Welcome Back, {user.firstName}</p> 
+    <div className="flex gap-2">
   
       <div className="dropdown dropdown-end">
         <div tabIndex={0} role="button" className="btn btn-ghost btn-circle avatar">
