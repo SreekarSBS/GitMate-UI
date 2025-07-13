@@ -20,7 +20,7 @@ const GetStarted = () => {
     if(isUserLogin.data) {
         return navigate("/login",{ state : {emailId : emailId} })
     }
-   else navigate("/profile")
+   else navigate("/signup",{ state : {emailId : emailId} })
 
   };
   return (

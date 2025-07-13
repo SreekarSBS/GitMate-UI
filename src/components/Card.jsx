@@ -1,6 +1,11 @@
+import axios from "axios";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
+import { BASE_URL } from "../utils/constants";
+import { useDispatch } from "react-redux";
+import { removeUserfromFeed } from "../utils/feedSlice";
 const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , skills , age,  setCards, cards }) => {
+  const dispatch = useDispatch()
     const x = useMotionValue(0);
     const rotateRaw = useTransform(x, [-150, 150], [-18, 18]);
     const opacity = useTransform(x, [-150, 0, 150], [0, 1, 0]);
@@ -33,6 +38,23 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , s
       const direction = x.get();
       if (Math.abs(direction) > 0) {
         setCards((prev) => prev.filter((v) => v._id !== _id));
+        try {
+          if(direction > 0){
+            const res = await axios.post(BASE_URL +`/request/send/interested/${_id}`,{},{withCredentials : true})
+            console.log(res);
+            dispatch(removeUserfromFeed(_id))
+          }
+          else {
+            const res = await axios.post(BASE_URL +`/request/send/ignored/${_id}`,{},{withCredentials : true});
+            console.log(res);
+            dispatch(removeUserfromFeed(_id))
+          }
+         
+        }
+        catch(err){
+          console.log(err);
+          
+        }
       }
      
     };
@@ -46,7 +68,7 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , s
     return (
       <motion.div
         className={`
-          w-80 md:w-1/4 h-[75%] xl:h-[95%] transition-all duration-0 ease-in-out
+          w-80 md:w-2/5 xl:w-2/7 lg:h-[90%] 2xl:w-1/4 h-[75%] xl:h-[95%] transition-all duration-0 ease-in-out
   
           ${cardColor} 
           rounded-xl shadow-2xl overflow-hidden 
@@ -70,10 +92,10 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , s
             ""
           }
           alt={`${firstName}'s photo`}
-          className="w-full  h-1/2  2xl:h-2/3 object-cover "
+          className="w-full  h-3/5 lg:h-3/5  2xl:h-2/3 object-cover "
         />
-        <div className="2xl:p-4 px-6   md:pt-8 text-black overflow-y-scroll  flex-1 mx-4 xl:mx-8 my-2  rounded-4xl border-t-1 border-b-8 border-l-1 border-r-1 border-b-gray-950 ">
-          <h3 className="text-gray-300 text-2xl xl:text-3xl font-light first-letter:font-bold first-letter:text-blue-600">
+        <div className="2xl:p-4   px-6  md:pt-8 text-black overflow-y-scroll  flex-1 mx-4 xl:mx-8 my-2  rounded-4xl border-t-1 border-b-8 border-l-1 border-r-1 border-b-gray-950 ">
+          <h3 className="text-gray-300  text-2xl lg:text-4xl xl:text-3xl font-light first-letter:font-bold first-letter:text-blue-600">
             {firstName} {lastName || ""}
           </h3>
           <p className=" text-gray-800 xl:text-lg font-light"><span className="font-bold">Gender</span>: {gender}</p>
