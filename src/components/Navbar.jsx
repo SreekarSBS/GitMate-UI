@@ -4,6 +4,7 @@ import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import { removeUser } from "../utils/userSlice";
 import { removeFeed } from "../utils/feedSlice";
+import { removeConnection } from "../utils/connectionSlice";
 
 
 const Navbar = () => {
@@ -17,6 +18,7 @@ const Navbar = () => {
     await axios.post(BASE_URL + "/logout",{},{withCredentials : true}) 
     dispatch(removeUser())
     dispatch(removeFeed())
+    dispatch(removeConnection())
     navigate("/auth")
   }
   catch(err){

@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
@@ -8,30 +8,45 @@ import { addConnection } from "../utils/connectionSlice";
 
 const Connections = () => {
   const dispatch = useDispatch();
-
+  const user = useSelector((store) => store.user)
+   const [errorMessage,setErrorMessage] = useState("No connections found for the user: " + user.firstName);
+    const [isEmpty,setIsEmpty] = useState(true);
   const connection = useSelector((store) => store.connection)
+  
   useEffect(() => {
     fetchData();
-  }, [connection]);
+  }, []);
 
   const fetchData = async () => {
     try {
     const res = await axios.get(BASE_URL + "/user/connections", {
       withCredentials: true,
     });
+    
     dispatch(addConnection(res?.data?.data))
-    console.log(res?.data?.data);
+    setIsEmpty(false)
+    // console.log(res?.data?.data);
   }catch(err){
-    console.log(err.message);
+    // console.log(err.message);
+    setErrorMessage(err.response.data.message)
+    setIsEmpty(true)
   }
   };
-console.log(connection);
+// console.log(connection);
 
-  if(!connection) return 
+  if(!connection) return <div className="flex justify-center mt-20">  <div role="alert" className="alert alert-warning flex ">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="h-6 w-6 shrink-0 stroke-current">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <span>{errorMessage}</span>
+  </div>
+  </div> 
+  
   connection.length === 0 && <h1>No connections yet</h1>
   return <div className="flex justify-center mt-18">
-   <ul className="list bg-base-100 w-3/5 rounded-box shadow-md">
   
+   <ul className="list bg-base-100 w-3/5 rounded-box shadow-md">
+    
   <li className="p-4 pb-2 text-3xl rounded-4xl bg-gradient-to-tr from-cyan-600 to-fuchsia-500 text-amber-50 text-center m-4 font-stretch-150% tracking-wide font-extralight">Connections</li>
  
   {connection.map((item,id) => {
