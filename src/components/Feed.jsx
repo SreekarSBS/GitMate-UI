@@ -13,7 +13,7 @@ const Feed = () => {
     
     try
    { 
-    const res = await axios.get(BASE_URL + "/user/feed",{withCredentials:true})
+    const res = await axios.get(BASE_URL + "/user/feed?limit=20",{withCredentials:true})
     // console.table("Feed hello" + res.data.data);
     
     if(res.data.data) dispatch(addFeed(res.data.data))

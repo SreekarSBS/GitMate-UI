@@ -15,7 +15,7 @@ const Connections = () => {
   
   useEffect(() => {
     fetchData();
-  }, []);
+  }, [connection]);
 
   const fetchData = async () => {
     try {

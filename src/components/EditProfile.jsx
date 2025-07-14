@@ -39,7 +39,7 @@ const saveProfile = async() => {
   },)
   
   
-  dispatch(addUser(res.data))
+  dispatch(addUser(res.data.data))
   console.log(res);
   SetShowToast(true)
   setTimeout(() => {

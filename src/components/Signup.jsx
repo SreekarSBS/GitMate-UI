@@ -1,13 +1,18 @@
 import axios from 'axios';
-import { useState } from 'react'
-import { useLocation } from 'react-router-dom';
+import {  useState } from 'react'
+import { useLocation, useNavigate } from 'react-router-dom';
 import { BASE_URL } from '../utils/constants';
 import Toast from './Toast';
 import PhoneCard from './PhoneCard';
+import { useDispatch } from 'react-redux';
+import { addUser } from '../utils/userSlice';
+
 
 const Signup = () => {
     const location = useLocation();
+    const navigate = useNavigate()
     const [isError,setIsError] = useState(false)
+    const dispatch = useDispatch()
     const [errorMessage,setErrorMessage] = useState();
     const [showToast,setShowToast] = useState(false)
     const [formData, setFormData] = useState({
@@ -20,9 +25,10 @@ const Signup = () => {
         skills: [],
         location: "",
         about: "",
-        photoURL: ""
+        photoURL: "https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg"
       });
       
+  
 
     const SignUp = async() => {
         try{
@@ -31,18 +37,20 @@ const Signup = () => {
             })
             console.log(res);
             setShowToast(true)
+            dispatch(addUser(res.data.data))
+            return navigate("/")
         }
         catch(err){
-            console.log(err.message);
-            setErrorMessage(err.message)
+            console.log(err);
+               setErrorMessage("Invalid Credentials - Make sure to keep about in 50 chars , proper photoURL and strong password , valid email.")
             setIsError(true);
         }
     }
 
 
-  return (<div className="flex justify-center">
+  return (<div className="flex justify-center mt-10 ">
       
-  <div className="mockup-code bg-primary-content w-full lg:w-1/2 p-4 lg:p-6 m-2 lg:m-10 2xl:w-2/6 ">
+  <div className="mockup-code  bg-primary-content  w-full lg:w-1/2 p-4 lg:p-6 m-2 lg:m-10 2xl:w-2/6  ">
   
     <pre data-prefix="$">
       <code>
@@ -171,7 +179,7 @@ const Signup = () => {
       </code>
       
     </pre>
-    <button onClick={SignUp} className="btn btn-outline btn-accent ml-8 ">Sign Up</button>
+    <button onClick={SignUp} className="btn btn-outline btn-accent  ml-8 ">Sign Up</button>
     <p className="text-xl text-red-600">{isError && errorMessage}</p>
     { showToast &&  <Toast /> }
   </div>

@@ -24,6 +24,7 @@ const Body = () => {
     }
   
     catch(err){
+      if(location.pathname != "/signup")
       navigate("/auth")
       console.log(err.message)
     }
@@ -43,9 +44,11 @@ const Body = () => {
 
 
   return (
-    <div>
+    <div className="min-h-screen flex flex-col">
       <Navbar />
+      <main className="flex-grow">
       <Outlet />
+      </main>
       <Footer />
     </div>
   );

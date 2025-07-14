@@ -37,7 +37,7 @@ const Login = () => {
   };
 
   return (
-    <div className="flex justify-center my-10">
+    <div className="flex justify-center my-10 ">
       <div
         data-theme="night"
         className="card bg-neutral text-neutral-content w-96"
