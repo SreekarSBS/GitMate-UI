@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import {BASE_URL} from "../utils/constants"
 import { useDispatch, useSelector } from 'react-redux';
 import { addRequest, removeRequest } from '../utils/requestSlice';
+
 const Requests = () => {
   const [errorMessage,setErrorMessage] = useState();
   
@@ -43,6 +44,19 @@ const Requests = () => {
     }
   }
 
+  const handleViewProfile = async(item) => {
+    try{
+    const id = item.fromUserId._id
+    const res = await axios.get(BASE_URL +"/profile/view/"+id,{withCredentials : true})
+    console.log(res);
+    }catch(err){
+      
+      console.log(err.message);
+      
+    }
+    
+  }
+
   console.log(request);
   
 if(!request || request.length === 0) return <div className='flex justify-center mt-20'><div role="alert" className="alert alert-info w-1/2">
@@ -60,7 +74,7 @@ if(!request || request.length === 0) return <div className='flex justify-center 
  {request.map((item,id) => {
    
    return (
-     <li key = {item.id} className={`list-row h-30  ${id === request.length-1 ? "border-b-2 border-b-cyan-600 border-l-4 border-l-cyan-600" : "border-b-4 border-b-cyan-600  border-l-4 border-l-cyan-600"}  `}>
+     <li onClick={handleViewProfile(item)} key = {item.id} className={`list-row h-30  ${id === request.length-1 ? "border-b-2 border-b-cyan-600 border-l-4 border-l-cyan-600" : "border-b-4 border-b-cyan-600  border-l-4 border-l-cyan-600"}  `}>
    <div className="text-4xl font-thin opacity-30 tabular-nums">0{id+1}</div>
    <div><img className="size-20 rounded-full" src={item.fromUserId.photoURL}/></div>
    <div className="list-col-grow text-sm lg:text-xl xl:text-2xl">

@@ -15,7 +15,7 @@ const Connections = () => {
   
   useEffect(() => {
     fetchData();
-  }, [connection]);
+  }, []);
 
   const fetchData = async () => {
     try {
@@ -32,7 +32,21 @@ const Connections = () => {
     
   }
   };
- console.log(connection);
+
+  const handleViewProfile = async(id) => {
+    try{
+   
+    const res = await axios.get(BASE_URL +"/profile/view/"+id,{withCredentials : true})
+    console.log(res);
+    }catch(err){
+      
+      console.log(err);
+      
+    }
+    
+  }
+
+//  console.log(connection);
 
   if(!connection) return <div className="flex justify-center mt-20">  <div role="alert" className="alert alert-warning flex ">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="h-6 w-6 shrink-0 stroke-current">
@@ -52,12 +66,16 @@ const Connections = () => {
   {connection.map((item,id) => {
     
     return (
-      <li key = {item.id} className={`list-row h-30  ${id === connection.length-1 ? "border-b-2 border-b-cyan-600 border-l-4 border-l-cyan-600" : "border-b-4 border-b-cyan-600  border-l-4 border-l-cyan-600"}  `}>
+      <li onClick={() => handleViewProfile(item._id)}  key = {item.id} className={`list-row h-30  ${id === connection.length-1 ? "border-b-2 border-b-cyan-600 border-l-4 border-l-cyan-600" : "border-b-4 border-b-cyan-600  border-l-4 border-l-cyan-600"}  `}>
     <div className="text-4xl font-thin opacity-30 tabular-nums">0{id+1}</div>
     <div><img className="size-20 rounded-full" src={item.photoURL}/></div>
     <div className="list-col-grow lg:text-xl xl:text-2xl">
       <div>{item.firstName} {item.lastName || " "}</div>
-      <div className="text-xs uppercase font-semibold opacity-60">Remaining Reason</div>
+      <div className="flex">
+      <div className="text-sm first-letter:uppercase font-semibold opacity-60">{item.gender}</div>
+      <div className="text-md first-letter:uppercase font-semibold opacity-60">{item.skills}</div>
+      <div className="text-lg first-letter:uppercase font-semibold opacity-60">{item.about}</div>
+      </div>
     </div>
     <button className="btn btn-square btn-ghost">
       <svg className="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><path d="M6 3L20 12 6 21 6 3z"></path></g></svg>

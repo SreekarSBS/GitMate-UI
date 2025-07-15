@@ -61,7 +61,9 @@ const Navbar = () => {
     
 
       </div>
+      {location.pathname === "/signup" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info w-28">Sign In</button>}
      {location.pathname === "/auth" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info w-28">Sign In</button>}
+     {location.pathname === "/login" && <button onClick={()=>navigate("/signup",{state : {emailId : null}})} className="btn btn-info w-28">Sign Up</button>}
   {user && <div className="flex items-center"> 
   
     <p className="m-4 text-blue-500 text-xl font-extralight font-stretch-200%">Welcome Back, {user.firstName}</p> 
