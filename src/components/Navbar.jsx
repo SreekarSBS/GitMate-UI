@@ -5,7 +5,10 @@ import axios from "axios";
 import { removeUser } from "../utils/userSlice";
 import { removeFeed } from "../utils/feedSlice";
 import { removeConnection } from "../utils/connectionSlice";
-
+import Dock from './Dock'; // Adjust path as needed
+import { VscHome, VscArchive, VscAccount, VscSettingsGear } from "react-icons/vsc";
+import { BsPeopleFill } from "react-icons/bs"
+import { MdPersonAdd } from "react-icons/md"
 
 const Navbar = () => {
  const navigate = useNavigate()
@@ -31,10 +34,17 @@ const Navbar = () => {
     const disAllow = ["/auth" , "/login" , "/signup" ]
     if(!disAllow.includes(location.pathname)) navigate("/");
   }
+  const items = [
+    { icon: <VscHome size={18} />, label: 'Home', onClick: () => navigate("/") },
+    { icon: <BsPeopleFill size={22} />, label: 'Connections', onClick: () => navigate("/connections") },
+    { icon: <MdPersonAdd size={22} />, label: 'Requests', onClick: () => navigate("/requests") },
+    { icon: <VscAccount size={18} />, label: 'Profile', onClick: () => navigate("/profile") },
+    
+  ];
   
   
     return <div data-theme = "night" className="navbar bg-base-300  border-b border-b-cyan-500/55 rounded-2xl shadow-2xl ">
-    <div className="flex-1 ">
+    <div className="flex-1 flex ">
     <a onClick={feedRedirect}  class="btn btn-ghost h-26 text-5xl">
       
 <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86" height="80" preserveAspectRatio="xMinYMin meet" viewBox="0 0 256 259.3" id="github">
@@ -55,11 +65,15 @@ const Navbar = () => {
   <path fill="#AF5C51" d="M168.3 85.5c0 6.3-3.6 11.4-7.9 11.4-4.4 0-7.9-5.1-7.9-11.4 0-6.3 3.6-11.4 7.9-11.4 4.4 0 7.9 5.1 7.9 11.4zm0 0M130.5 100.5c0 1.6-1.3 3-3 3-1.6 0-3-1.3-3-3s1.3-3 3-3c1.6 0 3 1.3 3 3zm0 0M120.6 108c-.2-.5.1-1 .6-1.2.5-.2 1 .1 1.2.6.8 2.2 2.8 3.6 5.1 3.6s4.3-1.5 5.1-3.6c.2-.5.7-.8 1.2-.6.5.2.8.7.6 1.2-1 2.9-3.8 4.9-6.9 4.9-3.1 0-5.9-2-6.9-4.9zm0 0"></path>
   <path fill="#C4E5D9" d="M54.5 121.6c0 .8-.9 1.4-2.1 1.4-1.1 0-2.1-.6-2.1-1.4 0-.8.9-1.4 2.1-1.4 1.2 0 2.1.6 2.1 1.4zm0 0M60.3 124.8c0 .8-.9 1.4-2.1 1.4-1.1 0-2.1-.6-2.1-1.4 0-.8.9-1.4 2.1-1.4 1.2 0 2.1.6 2.1 1.4zm0 0M63.8 129c0 .8-.9 1.4-2.1 1.4-1.1 0-2.1-.6-2.1-1.4 0-.8.9-1.4 2.1-1.4 1.2-.1 2.1.6 2.1 1.4zm0 0M67 133.8c0 .8-.9 1.4-2.1 1.4-1.1 0-2.1-.6-2.1-1.4 0-.8.9-1.4 2.1-1.4 1.2-.1 2.1.6 2.1 1.4zm0 0M70.5 138.2c0 .8-.9 1.4-2.1 1.4-1.1 0-2.1-.6-2.1-1.4 0-.8.9-1.4 2.1-1.4 1.2 0 2.1.6 2.1 1.4zm0 0M75.3 142.1c0 .8-.9 1.4-2.1 1.4-1.1 0-2.1-.6-2.1-1.4 0-.8.9-1.4 2.1-1.4 1.2-.1 2.1.6 2.1 1.4zm0 0M82 144.6c0 .8-.9 1.4-2.1 1.4-1.1 0-2.1-.6-2.1-1.4 0-.8.9-1.4 2.1-1.4 1.2 0 2.1.6 2.1 1.4zm0 0M88.7 144.6c0 .8-.9 1.4-2.1 1.4-1.1 0-2.1-.6-2.1-1.4 0-.8.9-1.4 2.1-1.4 1.2 0 2.1.6 2.1 1.4zm0 0M95.5 143.5c0 .8-.9 1.4-2.1 1.4-1.1 0-2.1-.6-2.1-1.4 0-.8.9-1.4 2.1-1.4 1.1 0 2.1.6 2.1 1.4zm0 0"></path>
 </svg>
-<div className="font-light text-white">Dev<span className="font-bold text-cyan-300">Meet</span></div>
+<div className="font-extralight rounded font-stretch-200%  text-white">Git<span className=" font-semibold font-stretch-200% text-cyan-300">Mate</span></div>
 
  </a>
-    
-
+{ user &&   <div className="hidden flex-1 relative lg:flex justify-center items-center">
+<div className="absolute ">
+    <Dock
+      items={items}  
+    />
+</div></div>}
       </div>
       {location.pathname === "/signup" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info w-28">Sign In</button>}
      {location.pathname === "/auth" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info w-28">Sign In</button>}

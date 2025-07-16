@@ -7,8 +7,8 @@ import { removeUserfromFeed } from "../utils/feedSlice";
 const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , skills , age,  setCards, cards }) => {
   const dispatch = useDispatch()
     const x = useMotionValue(0);
-    const rotateRaw = useTransform(x, [-150, 150], [-18, 18]);
-    const opacity = useTransform(x, [-150, 0, 150], [0, 1, 0]);
+    const rotateRaw = useTransform(x, [-200, 200], [-18, 18]);
+    const opacity = useTransform(x, [-600, 0, 600], [0.5, 1, 0.5]);
     const isFront = _id === cards[cards.length - 1]?._id;
   
     const rotate = useTransform(x, (latestX) => {
@@ -36,7 +36,7 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , s
   
     const handleDragEnd = async () => {
       const direction = x.get();
-      if (Math.abs(direction) > 0) {
+      if (Math.abs(direction) > 200) {
         setCards((prev) => prev.filter((v) => v._id !== _id));
         try {
           if(direction > 0){
@@ -55,6 +55,8 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , s
           console.log(err);
           
         }
+      } else{
+        x.set(0)
       }
      
     };

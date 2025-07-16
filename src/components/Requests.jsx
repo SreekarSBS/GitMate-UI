@@ -5,7 +5,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { addRequest, removeRequest } from '../utils/requestSlice';
 
 const Requests = () => {
-  const [errorMessage,setErrorMessage] = useState();
+  const [errorMessage,setErrorMessage] = useState("No Requests Found");
   
   const dispatch = useDispatch()
   const request = useSelector((store) => store.request)
@@ -74,12 +74,15 @@ if(!request || request.length === 0) return <div className='flex justify-center 
  {request.map((item,id) => {
    
    return (
-     <li onClick={handleViewProfile(item)} key = {item.id} className={`list-row h-30  ${id === request.length-1 ? "border-b-2 border-b-cyan-600 border-l-4 border-l-cyan-600" : "border-b-4 border-b-cyan-600  border-l-4 border-l-cyan-600"}  `}>
+     <li onClick={() =>handleViewProfile(item)} key = {item.id} className={`list-row h-30  ${id === request.length-1 ? "border-b-2 border-b-cyan-600 border-l-4 border-l-cyan-600" : "border-b-4 border-b-cyan-600  border-l-4 border-l-cyan-600"}  `}>
    <div className="text-4xl font-thin opacity-30 tabular-nums">0{id+1}</div>
    <div><img className="size-20 rounded-full" src={item.fromUserId.photoURL}/></div>
    <div className="list-col-grow text-sm lg:text-xl xl:text-2xl">
      <div>{item.fromUserId.firstName} {item.fromUserId.lastName || " "}</div>
-     <div className="text-xs uppercase font-semibold opacity-60">Remaining Reason</div>
+     <div className="text-sm first-letter:uppercase font-semibold opacity-60">Gender: <span className='uppercase'>{item.fromUserId.gender}</span></div>
+     <div className="text-sm first-letter:uppercase font-semibold opacity-60">Age: <span className='uppercase'>{item.fromUserId.age}</span></div>
+     <div className="text-sm first-letter:uppercase font-semibold opacity-60">Skills: <span className=''>{item.fromUserId.skills.join(" ,")}</span></div>
+     
    </div>
    <div className='flex-col flex '>
    <button onClick={() =>handleRequest("accepted",item)} className="btn btn-outline btn-success mb-1">Confirm</button>

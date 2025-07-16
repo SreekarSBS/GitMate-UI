@@ -71,10 +71,10 @@ const Connections = () => {
     <div><img className="size-20 rounded-full" src={item.photoURL}/></div>
     <div className="list-col-grow lg:text-xl xl:text-2xl">
       <div>{item.firstName} {item.lastName || " "}</div>
-      <div className="flex">
-      <div className="text-sm first-letter:uppercase font-semibold opacity-60">{item.gender}</div>
-      <div className="text-md first-letter:uppercase font-semibold opacity-60">{item.skills}</div>
-      <div className="text-lg first-letter:uppercase font-semibold opacity-60">{item.about}</div>
+      <div className="">
+      <div className="text-sm first-letter:uppercase font-semibold opacity-60"><span className="text-cyan-400">Gender: </span>{item.gender}</div>
+      <div className="text-sm first-letter:uppercase font-semibold opacity-60"><span className="text-cyan-400">Skills: </span>{item.skills.join(" ,")}</div>
+      <div className="text-sm first-letter:uppercase font-semibold opacity-60"><span className="text-cyan-400">About: </span>{item.about}</div>
       </div>
     </div>
     <button className="btn btn-square btn-ghost">
