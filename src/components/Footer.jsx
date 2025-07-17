@@ -11,7 +11,7 @@ const Footer = () => {
       <p>Copyright © {new Date().getFullYear()} - A <Link target='_blank' to="https://github.com/SreekarSBS" ><span  className='cursor-pointer text-cyan-500 text-md font-semibold'>Sreekar SBS</span></Link>  Production</p>
     </aside>
     <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-    <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/SreekarSBS" target="_blank" rel="noopener noreferrer">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
@@ -25,7 +25,7 @@ const Footer = () => {
     </svg>
   </a>
   {/* GitHub SVG icon */}
-  <a href="https://github.com" target="_blank" rel="noopener noreferrer">
+  <a href="https://linkedin.com/in/SreekarSBS" target="_blank" rel="noopener noreferrer">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
@@ -33,7 +33,7 @@ const Footer = () => {
       width="34"
       height="34"
       viewBox="0 0 48 48"
-      className="fill-current hover:scale-200 transition-transform hover:text-cyan-400 "
+      className="fill-current transition-transform hover:text-cyan-400 "
     >
       <path d="M3.986 41.658V6.339c0-1.291 1.049-2.34 2.34-2.34h35.321c1.291 0 2.34 1.049 2.34 2.34v35.319c0 1.291-1.049 2.34-2.34 2.34H6.326C5.035 43.998 3.986 42.949 3.986 41.658zM15.995 37.998V17.999H9.994v19.999H15.995zM24.995 37.998v-11.5c0-1.931 1.569-3.5 3.5-3.5s3.5 1.569 3.5 3.5l-.001 11.499h6.001V24.998c0-3.861-3.139-7-7-7-2.545 0-4.775 1.363-6.001 3.397l.001-3.396h-6.001v19.999H24.995zM15.995 12.998c0-1.656-1.344-3.001-3-3.001s-3 1.345-3 3.001 1.344 3.001 3 3.001S15.995 14.654 15.995 12.998zM7.926 7.934c2.133-.213 5.756-.895 5.713-1.348C13.581 6.006 8.841 5.971 6.93 6.01 6.379 6.049 5.961 6.521 5.995 7.066c0 .019-.004.916-.003.933-.033 2.013.024 5.591.587 5.647C7.031 13.69 7.713 10.067 7.926 7.934zM23.994 47.005c8.836 0 16.008.225 16.008.501 0 .276-7.172.501-16.008.501S7.986 47.782 7.986 47.506C7.986 47.23 15.158 47.005 23.994 47.005z"></path>
     </svg>
