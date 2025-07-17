@@ -71,7 +71,7 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , s
       <motion.div
         className={`
           w-80 md:w-2/5 xl:w-2/7 lg:h-[90%] 2xl:w-1/4 h-[75%] xl:h-[95%] transition-all duration-0 ease-in-out
-  
+         
           ${cardColor} 
           rounded-xl shadow-2xl overflow-hidden 
           relative flex flex-col transition-colors duration-300
@@ -94,7 +94,7 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , s
             ""
           }
           alt={`${firstName}'s photo`}
-          className="w-full  h-3/5 lg:h-3/5  2xl:h-2/3 object-cover "
+          className="w-full  h-3/5 lg:h-3/5  2xl:h-2/3 object-cover pointer-events-none "
         />
         <div className="2xl:p-4   px-6  md:pt-8 text-black overflow-y-scroll  flex-1 mx-4 xl:mx-8 my-2  rounded-4xl border-t-1 border-b-8 border-l-1 border-r-1 border-b-gray-950 ">
           <h3 className="text-gray-300  text-2xl lg:text-4xl xl:text-3xl font-light first-letter:font-bold first-letter:text-blue-600">
