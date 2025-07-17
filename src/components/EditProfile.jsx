@@ -160,8 +160,8 @@ catch(err){
         { showToast &&  <Toast /> }
       </div>
 
-      <div className="hidden lg:block mockup-phone ">
-  <div className="mockup-phone-camera border   "></div>
+      <div className="hidden lg:flex flex-col items-center mockup-phone ">
+  <div className="mockup-phone-camera border    "></div>
   <div className="mockup-phone-display flex  justify-center p-2">
     <div className="w-full h-[90%]   overflow-hidden">
       
