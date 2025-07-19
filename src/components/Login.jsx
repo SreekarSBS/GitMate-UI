@@ -30,7 +30,7 @@ const Login = () => {
         
     } catch (err) {
       console.log(err)
-      setError(err.response?.data?.message || "Enter valid credentials");
+      setError(err.response?.data || "Enter valid credentials");
 
       console.log("Failed to Log In :" + err);
       
@@ -116,6 +116,7 @@ const Login = () => {
             <button onClick={handleLogIn} className="btn btn-primary">
               Log In
             </button>
+            {error && <p className="text-red-500 text-lg">{error}</p>}
           </div>
         </div>
       </div>

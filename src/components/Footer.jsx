@@ -10,6 +10,18 @@ const Footer = () => {
       
       <p>Copyright © {new Date().getFullYear()} - A <Link target='_blank' to="https://github.com/SreekarSBS" ><span  className='cursor-pointer text-cyan-500 text-md font-semibold'>Sreekar SBS</span></Link>  Production</p>
     </aside>
+  
+ 
+  
+ 
+  <nav>
+  <h6 className="footer-title ">Legal</h6>
+    <Link to='/privacy' className="link link-hover">Privacy policy</Link>
+    <Link to='/terms' className="link link-hover">Terms and Conditions</Link>
+    <Link to='/cancellation' className="link link-hover">Cancellation & Refund</Link>
+    <Link to='/shipping' className="link link-hover">Shipping and Delivery</Link>
+    <Link to='/contact' className="link link-hover">Contact Us</Link>
+  </nav>
     <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
     <a href="https://github.com/SreekarSBS" target="_blank" rel="noopener noreferrer">
     <svg

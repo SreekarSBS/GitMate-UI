@@ -9,6 +9,11 @@ import Feed from "./components/Feed"
 import Connections from "./components/Connections"
 import Requests from "./components/Requests"
 import Signup from "./components/Signup"
+import PrivacyPolicy from "./components/Privacy"
+import TermsAndConditions from "./components/TC"
+import CancellationRefundPolicy from "./components/Cancellation"
+import ShippingDeliveryPolicy from "./components/Shipping"
+import ContactUs from "./components/Contact"
 
 function App() {
 
@@ -27,6 +32,11 @@ function App() {
             <Route path = "/profile" element = {<Profile />}/>
             <Route path = "/connections" element = {<Connections />} />
             <Route path = "/requests" element = {<Requests />} />
+            <Route path = "/privacy" element = {<PrivacyPolicy />} />
+            <Route path = "/terms" element = {<TermsAndConditions />} />
+            <Route path = "/cancellation" element = {<CancellationRefundPolicy />} />
+            <Route path = "/shipping" element = {<ShippingDeliveryPolicy />} />
+            <Route path = "/contact" element = {<ContactUs />} />
           </Route>
         </Routes>
      </BrowserRouter>
