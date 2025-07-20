@@ -3,6 +3,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
 
+
 const GetStarted = () => {
   const [emailId, setEmailId] = useState();
   const [errorMessage,setErrorMessage] = useState(false)
@@ -36,6 +37,7 @@ const GetStarted = () => {
         <div className="max-w-md text-blue-100">
           <h1 className="mb-5 text-5xl xl:text-6xl font-serif ">Get Started</h1>
           <p className="mb-5">Connecting Developers</p>
+          
           <div className="flex items-center">
             <label className="floating-label w-full mr-2">
               <input

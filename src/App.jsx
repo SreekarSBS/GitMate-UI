@@ -14,6 +14,7 @@ import TermsAndConditions from "./components/TC"
 import CancellationRefundPolicy from "./components/Cancellation"
 import ShippingDeliveryPolicy from "./components/Shipping"
 import ContactUs from "./components/Contact"
+import Premium from "./components/Premium"
 
 function App() {
 
@@ -37,6 +38,7 @@ function App() {
             <Route path = "/cancellation" element = {<CancellationRefundPolicy />} />
             <Route path = "/shipping" element = {<ShippingDeliveryPolicy />} />
             <Route path = "/contact" element = {<ContactUs />} />
+            <Route path = "/premium" element = {<Premium />} />
           </Route>
         </Routes>
      </BrowserRouter>
