@@ -4,7 +4,7 @@ import { useDispatch } from "react-redux";
 import { addUser } from "../utils/userSlice";
 import { useLocation, useNavigate } from "react-router-dom";
 import { BASE_URL } from "../utils/constants";
-import ClerkAuth from "./ClerkAuth";
+
 const Login = () => {
  
   const [password, setPassword] = useState("");

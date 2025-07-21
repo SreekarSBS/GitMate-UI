@@ -3,11 +3,11 @@ import { SignedIn, SignedOut, SignInButton, UserButton } from '@clerk/clerk-reac
 const ClerkAuth = () => {
   return (
     <>
-      <SignedOut redirectUrl="/auth">
-        <SignInButton redirectUrl="/auth"/>
+      <SignedOut >
+        <SignInButton />
       </SignedOut>
-      <SignedIn redirectUrl="/">
-        <UserButton redirectUrl="/"/>
+      <SignedIn >
+        <UserButton />
       </SignedIn>
     </>
   );
