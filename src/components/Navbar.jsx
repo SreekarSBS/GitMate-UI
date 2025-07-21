@@ -9,7 +9,7 @@ import Dock from './Dock'; // Adjust path as needed
 import { VscHome, VscArchive, VscAccount, VscSettingsGear } from "react-icons/vsc";
 import { BsPeopleFill } from "react-icons/bs"
 import { MdPersonAdd } from "react-icons/md"
-import ClerkAuth from "./ClerkAuth";
+
 
 const Navbar = () => {
  const navigate = useNavigate()
@@ -76,7 +76,7 @@ const Navbar = () => {
     />
 </div></div>}
       </div>
-      {location.pathname === "/signup" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info w-28"> <ClerkAuth /></button>}
+      {location.pathname === "/signup" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info w-28">Sign In</button>}
      {location.pathname === "/auth" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info w-28">Sign In</button>}
      {location.pathname === "/login" && <button onClick={()=>navigate("/signup",{state : {emailId : null}})} className="btn btn-info w-28">Sign Up</button>}
     

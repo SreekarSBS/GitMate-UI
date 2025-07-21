@@ -16,13 +16,21 @@ import ShippingDeliveryPolicy from "./components/Shipping"
 import ContactUs from "./components/Contact"
 import Premium from "./components/Premium"
 
-function App() {
 
+
+function App() {
+// Import your Publishable Key
+const PUBLISHABLE_KEY = import.meta.env.VITE_CLERK_PUBLISHABLE_KEY
+
+if (!PUBLISHABLE_KEY) {
+  throw new Error('Add your Clerk Publishable Key to the .env file')
+}
 
   return (
     <>
       <Provider store = {appStore} >
      <BrowserRouter  >
+    
         <Routes >
           <Route path = "/" element = {<Body />} >
           <Route path = "/" element = {<Feed />} />
@@ -41,6 +49,7 @@ function App() {
             <Route path = "/premium" element = {<Premium />} />
           </Route>
         </Routes>
+       
      </BrowserRouter>
      </Provider>
     </>

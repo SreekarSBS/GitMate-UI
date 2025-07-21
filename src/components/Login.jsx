@@ -40,7 +40,7 @@ const Login = () => {
 
   return (
     <div className="flex justify-center my-10 ">
-      <ClerkAuth />
+      
       <div
         data-theme="night"
         className="card bg-neutral text-neutral-content w-96"
@@ -119,9 +119,13 @@ const Login = () => {
               Log In
             </button>
             {error && <p className="text-red-500 text-lg">{error}</p>}
+            
           </div>
+          
         </div>
+       
       </div>
+     
     </div>
   );
 };
