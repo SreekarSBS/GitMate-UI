@@ -23,7 +23,7 @@ const GetStarted = () => {
     }
    else navigate("/signup",{ state : {emailId : emailId} })
 
-  };
+  }
   return (
     <div
       className="hero h-[97vh] "
