@@ -3,6 +3,7 @@ import { BASE_URL } from "../utils/constants";
 import axios from "axios";
 import { useDispatch, useSelector } from "react-redux";
 import { addConnection } from "../utils/connectionSlice";
+import { Link } from "react-router-dom";
 
 
 
@@ -66,7 +67,7 @@ const Connections = () => {
   {connection.map((item,id) => {
     
     return (
-      <li onClick={() => handleViewProfile(item._id)}  key = {item.id} className={`list-row h-30  ${id === connection.length-1 ? "border-b-2 border-b-cyan-600 border-l-4 border-l-cyan-600" : "border-b-4 border-b-cyan-600  border-l-4 border-l-cyan-600"}  `}>
+      <li onClick={() => handleViewProfile(item._id)}  key = {item.id} className={`list-row h-30 min-w-96 overflow-clip  ${id === connection.length-1 ? "border-b-2 border-b-cyan-600 border-l-4 border-l-cyan-600" : "border-b-4 border-b-cyan-600  border-l-4 border-l-cyan-600"}  `}>
     <div className="text-4xl font-thin opacity-30 tabular-nums">0{id+1}</div>
     <div><img className="size-20 rounded-full" src={item.photoURL}/></div>
     <div className="list-col-grow lg:text-xl xl:text-2xl">
@@ -77,9 +78,10 @@ const Connections = () => {
       <div className="text-sm first-letter:uppercase font-semibold opacity-60"><span className="text-cyan-400">About: </span>{item.about}</div>
       </div>
     </div>
+    <Link to = {`/chat/${item._id}`}>
     <button className="btn btn-square btn-ghost">
       <svg className="size-[1.2em]" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2" fill="none" stroke="currentColor"><path d="M6 3L20 12 6 21 6 3z"></path></g></svg>
-    </button>
+    </button></Link>
   </li>
     )
   })  

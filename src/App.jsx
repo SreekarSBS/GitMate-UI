@@ -15,6 +15,7 @@ import CancellationRefundPolicy from "./components/Cancellation"
 import ShippingDeliveryPolicy from "./components/Shipping"
 import ContactUs from "./components/Contact"
 import Premium from "./components/Premium"
+import Chat from "./components/Chat"
 
 
 
@@ -41,6 +42,7 @@ function App() {
             <Route path = "/shipping" element = {<ShippingDeliveryPolicy />} />
             <Route path = "/contact" element = {<ContactUs />} />
             <Route path = "/premium" element = {<Premium />} />
+            <Route path = "/chat/:targetUserId" element = {<Chat />} />
           </Route>
         </Routes>
        
