@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
@@ -10,8 +10,9 @@ const Chat = () => {
   const [messages, setMessages] = useState([]);
   const [newMessage, setNewMessage] = useState()
   const user = useSelector((store) => store.user);
+  const [error,setError] = useState()
   const userId = user?._id;
-  const photo = user?.photoURL
+  const chatContainerRef = useRef();
   useEffect(() => {
     if(!userId) return
     const socket = createSocketConnection();
@@ -21,52 +22,88 @@ const Chat = () => {
       targetUserId,
     });
 
-    socket.on("messageReceived",({firstName,text,userId,photo,createdAt}) => {
+    socket.on("messageReceived",({firstName,text,userId,createdAt,photoURL,id}) => {
       console.log(firstName + ": " + text);
-      setMessages((messages) => [...messages,{firstName,text,userId,photo,createdAt}])
+      setMessages((messages) => [...messages,{firstName,text,userId,createdAt,photoURL,id}])
       
     })
-    fetchChats()
+    
 
     return () => {
       socket.disconnect();
     };
   }, [userId,targetUserId]);
 
+  useEffect(() => {
+    fetchChats()
+  },[])
+
+
+
+  useEffect(() => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTo({
+        top: chatContainerRef.current.scrollHeight,
+        behavior: "smooth", // this makes it smooth
+      });
+    }
+  }, [messages]);
+  
+
+
   const fetchChats = async() => {
     try{
-    const chatsData = await axios.get(BASE_URL +`/chats/${targetUserId}`,{withCredentials : true})
-    console.log(chatsData?.data?.data?.messages);
+    const res = await axios.get(BASE_URL +`/chats/${targetUserId}`,{withCredentials : true})
+     const chatsData =res?.data?.data?.messages.map((item) =>{
+      const {firstName,photoURL ,_id} = item.senderId;
+      return  {
+        firstName,
+        photoURL,
+        text : item.text,
+        id : item._id,
+        senderId : _id,
+        createdAt: item.createdAt,
+      }
+     });
+    console.log(chatsData);
     
-    setMessages(chatsData?.data?.data?.messages)
+    setMessages(chatsData)
     }catch(err){
-      console.log(err.message);
-      
+      console.log(err);
+      setError(err.response.data)
     }
   }
 
   const sendMessage = () => {
     const socket = createSocketConnection()
 
-    socket.emit("sendMessage",{firstName:user.firstName,userId,targetUserId,text:newMessage,photo})
+    socket.emit("sendMessage",{firstName:user.firstName,userId,targetUserId,text:newMessage,photoURL:user?.photoURL})
+    
     setNewMessage("")
   }
 
+  if(error) return <div className='flex justify-center mt-20'><div role="alert" className="alert alert-info w-1/2">
+    <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" className="h-6 w-6 shrink-0 stroke-current">
+      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+    </svg>
+    <span>{error}</span>
+    </div></div>
+    
   return (
     <div className="mx-auto my-10 rounded-lg border-cyan-500 w-[50vh] md:w-1/2 border flex flex-col   h-[80vh]  ">
       <div className="w-full rounded-3xl h-20 btn border-b-6 border-b-cyan-500 text-2xl">
         Chat
       </div>
-      <div className="flex-1 overflow-scroll p-5">
+      <div ref={chatContainerRef} className=" flex-1  overflow-scroll p-5">
         {messages.map((msg) => {
           return (
            
-              <div key={msg._id} className={`chat ${msg?.senderId?._id === userId ?"chat-end" : "chat-start"}`}>
+              <div key={msg.id} className={`chat py-4 ${msg?.senderId === userId || msg?.userId === userId ?"chat-end" : "chat-start"}`}>
                 <div className="chat-image avatar">
                   <div className="w-10 rounded-full">
                     <img
                       alt="Tailwind CSS chat bubble component"
-                      src={msg.senderId.photoURL}
+                      src={msg?.photoURL}
                     />
                   </div>
                 </div>
