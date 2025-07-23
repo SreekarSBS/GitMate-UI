@@ -2,6 +2,8 @@ import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { createSocketConnection } from "../utils/socket";
 import { useSelector } from "react-redux";
+import axios from "axios";
+import { BASE_URL } from "../utils/constants";
 
 const Chat = () => {
   const { targetUserId } = useParams();
@@ -19,17 +21,29 @@ const Chat = () => {
       targetUserId,
     });
 
-    socket.on("messageReceived",({firstName,text,userId,photo}) => {
+    socket.on("messageReceived",({firstName,text,userId,photo,createdAt}) => {
       console.log(firstName + ": " + text);
-      setMessages((messages) => [...messages,{firstName,text,userId,photo}])
+      setMessages((messages) => [...messages,{firstName,text,userId,photo,createdAt}])
       
     })
-
+    fetchChats()
 
     return () => {
       socket.disconnect();
     };
   }, [userId,targetUserId]);
+
+  const fetchChats = async() => {
+    try{
+    const chatsData = await axios.get(BASE_URL +`/chats/${targetUserId}`,{withCredentials : true})
+    console.log(chatsData?.data?.data?.messages);
+    
+    setMessages(chatsData?.data?.data?.messages)
+    }catch(err){
+      console.log(err.message);
+      
+    }
+  }
 
   const sendMessage = () => {
     const socket = createSocketConnection()
@@ -44,28 +58,30 @@ const Chat = () => {
         Chat
       </div>
       <div className="flex-1 overflow-scroll p-5">
-        {messages.map((msg, index) => {
+        {messages.map((msg) => {
           return (
-            <>
-              {" "}
-              <div key={index} className={`chat ${msg.userId === userId ?"chat-end" : "chat-start"}`}>
+           
+              <div key={msg._id} className={`chat ${msg?.senderId?._id === userId ?"chat-end" : "chat-start"}`}>
                 <div className="chat-image avatar">
                   <div className="w-10 rounded-full">
                     <img
                       alt="Tailwind CSS chat bubble component"
-                      src={msg.photo}
+                      src={msg.senderId.photoURL}
                     />
                   </div>
                 </div>
                 <div className="chat-header">
                   {msg.firstName}
-                  <time className="text-xs opacity-50">12:45</time>
+                  <time className="text-xs opacity-50">{new Date(msg.createdAt).toLocaleTimeString([],{
+                    hour: '2-digit',
+                    minute: '2-digit',
+                  })}</time>
                 </div>
                 <div className="chat-bubble">{msg.text}</div>
                 <div className="chat-footer opacity-50">Delivered</div>
               </div>
          
-            </>
+            
           );
         })}
       </div>
