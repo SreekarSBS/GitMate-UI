@@ -64,6 +64,8 @@ const Connections = () => {
     
   <li className="p-4 mb-6 pb-2 text-3xl rounded-4xl bg-gradient-to-tr from-cyan-600 to-fuchsia-500 text-amber-50 text-center m-4 font-stretch-150% tracking-wide font-extralight">Connections</li>
  
+  
+
   {connection.map((item,id) => {
     
     return (
@@ -78,7 +80,10 @@ const Connections = () => {
       <div className="text-sm first-letter:uppercase font-semibold opacity-60"><span className="text-cyan-400">About: </span>{item.about}</div>
       </div>
     </div>
-    <Link to = {`/chat/${item._id}`}>
+    <Link to = {{
+      pathname : `/chat/${item._id}`,
+      state : item
+    }}>
     <button className="btn btn-square btn-lg hover:btn-accent m-4 ">
     <img width="64" height="64" src="https://img.icons8.com/arcade/64/chat.png" alt="chat"/>
          </button></Link>

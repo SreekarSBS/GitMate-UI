@@ -5,13 +5,17 @@ import { useSelector } from "react-redux";
 import axios from "axios";
 import { BASE_URL } from "../utils/constants";
 
+
 const Chat = () => {
   const { targetUserId } = useParams();
   const [messages, setMessages] = useState([]);
-  const [newMessage, setNewMessage] = useState()
+  const [newMessage, setNewMessage] = useState("")
   const user = useSelector((store) => store.user);
   const [error,setError] = useState()
+  const [profileData,setProfileData] = useState()
   const userId = user?._id;
+  
+
   const chatContainerRef = useRef();
   useEffect(() => {
     if(!userId) return
@@ -25,7 +29,6 @@ const Chat = () => {
     socket.on("messageReceived",({firstName,text,userId,createdAt,photoURL,id}) => {
       console.log(firstName + ": " + text);
       setMessages((messages) => [...messages,{firstName,text,userId,createdAt,photoURL,id}])
-      
     })
     
 
@@ -36,6 +39,7 @@ const Chat = () => {
 
   useEffect(() => {
     fetchChats()
+    fetchProfile()
   },[])
 
 
@@ -50,7 +54,17 @@ const Chat = () => {
   }, [messages]);
   
 
-
+  const fetchProfile = async() => {
+    try{
+    const res = await axios.get(BASE_URL+"/profile/view/"+targetUserId,{withCredentials : true});
+    console.log(res?.data?.data);
+    setProfileData(res?.data?.data)
+    }catch(err){
+      console.log(err.response);
+      
+    }
+    
+  }
   const fetchChats = async() => {
     try{
     const res = await axios.get(BASE_URL +`/chats/${targetUserId}`,{withCredentials : true})
@@ -88,11 +102,17 @@ const Chat = () => {
     </svg>
     <span>{error}</span>
     </div></div>
-    
+
+
   return (
     <div className="mx-auto my-10 rounded-lg border-cyan-500 w-[50vh] md:w-1/2 border flex flex-col   h-[80vh]  ">
-      <div className="w-full rounded-3xl h-20 btn border-b-6 border-b-cyan-500 text-2xl">
-        Chat
+      <div className="w-full btn font-stretch-125% text-gray-200 font-light flex items-center  rounded-4xl h-20 border-b-6 border-b-cyan-500 text-xl">
+      <div class="avatarl">
+  <div class="ring-primary m-2 ring-offset-base-100 w-12  ring-offset-2">
+    <img className="rounded-full" src={profileData?.photoURL} />
+  </div>
+</div>
+        {profileData?.firstName}  {profileData?.lastName}
       </div>
       <div ref={chatContainerRef} className=" flex-1  overflow-scroll p-5">
         {messages.map((msg) => {
