@@ -25,7 +25,7 @@ const Body = () => {
   
     catch(err){
       if(location.pathname != "/signup")
-      navigate("/auth")
+      return navigate("/auth")
       console.log(err.message)
     }
   };
@@ -37,7 +37,7 @@ const Body = () => {
 
   useEffect(() => {
     if (userData && location.pathname === "/auth") {
-      navigate("/", { replace: true });
+     return navigate("/", { replace: true });
     }
    
   }, [userData, location.pathname]);

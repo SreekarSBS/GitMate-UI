@@ -36,7 +36,8 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , s
   
     const handleDragEnd = async () => {
       const direction = x.get();
-      if (Math.abs(direction) > 200) {
+      const threshold = window.innerWidth < 768 ? 60 : 200;
+      if (Math.abs(direction) > threshold) {
         setCards((prev) => prev.filter((v) => v._id !== _id));
         try {
           if(direction > 0){

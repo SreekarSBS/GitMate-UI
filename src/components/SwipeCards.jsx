@@ -1,10 +1,21 @@
 
-import {  useState } from "react";
+import {  useEffect, useState } from "react";
 import Card from "./Card";
 
-const SwipeCards = ({ cardData }) => {
+const SwipeCards = ({ cardData,onEmpty }) => {
   const [cards, setCards] = useState(cardData || []);
- 
+  
+  useEffect(() => {
+    setCards(cardData);
+  }, [cardData]);
+
+  // Call onEmpty when all cards are swiped
+  useEffect(() => {
+    if (cards.length === 0 && onEmpty) {
+      onEmpty();
+    }
+  }, [cards, onEmpty]);
+
   return (
     <div
       className="grid h-[80vh] w-screen place-items-center select-none"
@@ -23,6 +34,7 @@ const SwipeCards = ({ cardData }) => {
       ))}
       {cards.length === 0 && (
         <div className="text-center text-gray-100 text-xl font-semibold">
+       
           🎉 No more profiles!
         </div>
       )}
