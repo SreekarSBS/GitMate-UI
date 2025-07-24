@@ -10,11 +10,7 @@ const SwipeCards = ({ cardData,onEmpty }) => {
   }, [cardData]);
 
   // Call onEmpty when all cards are swiped
-  useEffect(() => {
-    if (cards.length === 0 && onEmpty) {
-      onEmpty();
-    }
-  }, [cards, onEmpty]);
+ 
 
   return (
     <div
@@ -24,12 +20,14 @@ const SwipeCards = ({ cardData,onEmpty }) => {
        
       }}
     >
-      {cards.map((card) => (
+      {cards.map((card,idx) => (
         <Card
           key={card._id}
           {...card}
           setCards={setCards}
+          lastCard = {idx === 0}
           cards={cards}
+          onEmpty={onEmpty}
         />
       ))}
       {cards.length === 0 && (
@@ -49,4 +47,3 @@ const SwipeCards = ({ cardData,onEmpty }) => {
 
 
 export default SwipeCards;
-

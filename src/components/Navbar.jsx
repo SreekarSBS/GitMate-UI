@@ -83,7 +83,7 @@ const Navbar = () => {
   {user && <div className="flex items-center"> 
    
     
-    <p className="m-4 text-blue-500 text-xl font-extralight font-stretch-200%">Welcome Back, {user.firstName}</p> 
+    <p className=" hidden lg:block m-4 text-blue-500 text-xl font-extralight font-stretch-200%">Welcome Back, {user.firstName}</p> 
 
     <div className="flex gap-2">
   

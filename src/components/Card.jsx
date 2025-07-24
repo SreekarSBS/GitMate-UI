@@ -2,10 +2,11 @@ import axios from "axios";
 import { motion, useMotionValue, useTransform } from "framer-motion";
 import { useEffect, useState } from "react";
 import { BASE_URL } from "../utils/constants";
-import { useDispatch } from "react-redux";
 import { removeUserfromFeed } from "../utils/feedSlice";
-const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , skills , age,  setCards, cards }) => {
-  const dispatch = useDispatch()
+ import { useDispatch } from "react-redux";
+
+const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , skills , age, setCards,lastCard,cards,onEmpty }) => {
+   const dispatch = useDispatch()
     const x = useMotionValue(0);
     const rotateRaw = useTransform(x, [-200, 200], [-18, 18]);
     const opacity = useTransform(x, [-600, 0, 600], [0.5, 1, 0.5]);
@@ -38,17 +39,27 @@ const Card = ({ _id, photoURL, firstName, lastName, gender, about , location , s
       const direction = x.get();
       const threshold = window.innerWidth < 768 ? 60 : 200;
       if (Math.abs(direction) > threshold) {
-        setCards((prev) => prev.filter((v) => v._id !== _id));
+       
+        setCards((prev) => prev.filter((c) => c._id !== _id));
+
+        // if that was truly the last card, trigger next page
+        if (lastCard) onEmpty();
+  
+
         try {
           if(direction > 0){
             const res = await axios.post(BASE_URL +`/request/send/interested/${_id}`,{},{withCredentials : true})
             console.log(res);
-            dispatch(removeUserfromFeed(_id))
+            
+             dispatch(removeUserfromFeed(_id))
+            
           }
           else {
             const res = await axios.post(BASE_URL +`/request/send/ignored/${_id}`,{},{withCredentials : true});
             console.log(res);
-            dispatch(removeUserfromFeed(_id))
+            
+             dispatch(removeUserfromFeed(_id))
+            
           }
          
         }

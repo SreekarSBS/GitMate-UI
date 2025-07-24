@@ -105,21 +105,21 @@ const Chat = () => {
 
 
   return (
-    <div className="mx-auto my-10 rounded-lg border-cyan-500 w-[50vh] md:w-1/2 border flex flex-col   h-[80vh]  ">
-      <div className="w-full btn font-stretch-125% text-gray-200 font-light flex items-center  rounded-4xl h-20 border-b-6 border-b-cyan-500 text-xl">
-      <div class="avatarl">
-  <div class="ring-primary m-2 ring-offset-base-100 w-12  ring-offset-2">
+    <div className="mx-auto my-10 rounded-4xl border-cyan-500 w-[50vh] md:w-1/2 border flex flex-col   h-[80vh]  ">
+      <div className="w-full  btn font-stretch-125% text-gray-200 font-light flex items-center  rounded-full h-20 border-b-4 border-b-cyan-500 text-xl">
+      <div class="avatarl ">
+  <div class="ring-primary   m-2 ring-offset-base-100 w-12  ring-offset-2">
     <img className="rounded-full" src={profileData?.photoURL} />
   </div>
 </div>
         {profileData?.firstName}  {profileData?.lastName}
       </div>
-      <div ref={chatContainerRef} className=" flex-1  overflow-scroll p-5">
+      <div  ref={chatContainerRef} className=" flex-1 overflow-scroll p-5">
         {messages.map((msg) => {
           return (
            
               <div key={msg.id} className={`chat py-4 ${msg?.senderId === userId || msg?.userId === userId ?"chat-end" : "chat-start"}`}>
-                <div className="chat-image avatar">
+                <div className="chat-image  avatar">
                   <div className="w-10 rounded-full">
                     <img
                       alt="Tailwind CSS chat bubble component"
@@ -127,14 +127,14 @@ const Chat = () => {
                     />
                   </div>
                 </div>
-                <div className="chat-header">
+                <div  className="chat-header">
                   {msg.firstName}
                   <time className="text-xs opacity-50">{new Date(msg.createdAt).toLocaleTimeString([],{
                     hour: '2-digit',
                     minute: '2-digit',
                   })}</time>
                 </div>
-                <div className="chat-bubble">{msg.text}</div>
+                <div  data-theme = "ice" className={`chat-bubble border-b ${msg?.senderId === userId || msg?.userId === userId ?"border-l" : "border-r"}`}>{msg.text}</div>
                 <div className="chat-footer opacity-50">Delivered</div>
               </div>
          
@@ -142,7 +142,7 @@ const Chat = () => {
           );
         })}
       </div>
-      <div className="p-5 border-t flex items-center  border-gray-600 gap-2">
+      <div  className="p-5 border-t flex items-center  border-gray-600 gap-2">
         <input
          value={newMessage}
          onChange={(e) => setNewMessage(e.target.value)}
