@@ -72,7 +72,7 @@ const Signup = () => {
 
   return (<div className="flex flex-col md:flex-row justify-center mt-10 ">
       
-  <div className="mockup-code  bg-primary-content  w-3/4 m-auto md:w-1/2 lg:w-1/2 p-4 lg:p-6 md:m-2 lg:m-10 2xl:w-2/6  ">
+  <div className="mockup-code  bg-primary-content  m-auto md:w-1/2 lg:w-1/2 p-4 lg:p-6 md:m-2 lg:m-10 2xl:w-2/6  ">
   
     <pre data-prefix="$">
       <code>
