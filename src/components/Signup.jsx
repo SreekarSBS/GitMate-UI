@@ -13,16 +13,16 @@ const Signup = () => {
     const navigate = useNavigate()
     const [isError,setIsError] = useState(false)
     const dispatch = useDispatch()
-    const [errorMessage,setErrorMessage] = useState();
+    const [errorMessage,setErrorMessage] = useState("");
     const [showToast,setShowToast] = useState(false)
     const [formData, setFormData] = useState({
         firstName: "",
         lastName: "",
-        emailId: location.state.emailId || "",
+        emailId: location?.state?.emailId || "",
         password: "",
         gender: "",
         age: "",
-        skills: [],
+        skills: "",
         location: "",
         about: "",
         photoURL: "https://isobarscience-1bfd8.kxcdn.com/wp-content/uploads/2020/09/default-profile-picture1.jpg"
@@ -32,19 +32,41 @@ const Signup = () => {
 
     const SignUp = async() => {
         try{
-            const res = await axios.post(BASE_URL + "/signup" ,formData, {
+          if (!formData?.firstName || !formData?.emailId || !formData.password) {
+            setErrorMessage("First name, email, and password are required.");
+            setIsError(true);
+            return;
+          }
+          if (formData.password.length < 6) {
+            setErrorMessage("Password must be at least 6 characters.");
+            setIsError(true);
+            return;
+          }
+          
+          const payload = {
+            ...formData,
+            skills: formData.skills.split(/[, ]+/).map((s) => s.trim()).filter(Boolean), // filter(Boolean) removes empty entries
+          };
+          console.log("Payload before signup:", payload);
+
+            const res = await axios.post(BASE_URL + "/signup" ,payload, {
                 withCredentials : true
             })
             console.log(res);
-            setShowToast(true)
-            dispatch(addUser(res.data.data))
-            return navigate("/")
+            if (res?.status === 200) {
+              setShowToast(true);
+              dispatch(addUser(res.data.data));
+              navigate("/");
+            }
+            
         }
         catch(err){
-            console.log(err);
-               setErrorMessage("Invalid Credentials - Make sure to keep about in 50 chars , proper photoURL and strong password , valid email.")
-            setIsError(true);
-        }
+          console.error(err);
+          const serverMsg = err.response?.data || err.message || "Signup failed.";
+          setErrorMessage(serverMsg.toString());
+          setIsError(true);
+      }
+      
     }
 
 
@@ -78,7 +100,7 @@ const Signup = () => {
     </pre>
     <pre data-prefix=">" className="text-accent">
       <code>
-        emailId :{" "}
+        emailId : {" "}
         <input
           value={formData.emailId}
           onChange={(e) => setFormData({...formData , emailId: e.target.value})}
@@ -128,13 +150,12 @@ const Signup = () => {
       <code>
         Skills :{"   "}
         <input
-  value={formData.skills.join(", ")}
+  value={formData.skills}
   onChange={(e) =>
     setFormData({
       ...formData,
-      skills: e.target.value.split(",").map((s) => s.trim()),
-    })
-  }
+      skills: e.target.value.trimStart()})}
+  
   type="text"
   placeholder="e.g. React, Node.js"
   className="m-6 text-green-600 input input-info"

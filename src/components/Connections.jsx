@@ -58,7 +58,7 @@ const Connections = () => {
   </div> 
   
   if(connection.length === 0) return <h1>No connections yet</h1>
-  return <div className="flex justify-center mt-18">
+  return <div className="flex justify-center m-8">
   
    <ul className="list bg-base-100 w-3/5 rounded-box shadow-md">
     

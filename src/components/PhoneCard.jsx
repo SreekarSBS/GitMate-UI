@@ -23,7 +23,7 @@ const PhoneCard = ({ user }) => {
           </h3>
           <p><span className="font-bold">Gender:</span> {gender}</p>
           <p><span className="font-bold">Age:</span> {age}</p>
-          <p><span className="font-bold">Skills:</span> {skills?.join(", ")}</p>
+          <p><span className="font-bold">Skills:</span> {skills}</p>
           <p><span className="font-bold">Location:</span> {location}</p>
           <p><span className="font-bold">About:</span> {about}</p>
         </div>

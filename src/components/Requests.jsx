@@ -65,7 +65,7 @@ if(!request || request.length === 0) return <div className='flex justify-center 
 </svg>
 <span>{errorMessage}</span>
 </div></div>
-  return <div className="flex justify-center mt-18">
+  return <div className="flex justify-center m-8">
   
   <ul className="list bg-base-100 w-3/5 rounded-box shadow-md">
    

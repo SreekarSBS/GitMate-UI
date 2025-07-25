@@ -23,7 +23,7 @@ const Feed = () => {
     
     try
    { 
-    const res = await axios.get(BASE_URL + "/user/feed?limit=10&page="+page,{withCredentials:true})
+    const res = await axios.get(BASE_URL + "/user/feed?limit=100&page="+page,{withCredentials:true})
     // console.table("Feed hello" + res.data.data);
     const newCards = res?.data?.data 
     if(newCards.length === 0){
