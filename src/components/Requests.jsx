@@ -67,7 +67,7 @@ if(!request || request.length === 0) return <div className='flex justify-center 
 </div></div>
   return <div className="flex justify-center m-8">
   
-  <ul className="list bg-base-100 w-3/5 rounded-box shadow-md">
+  <ul className="list bg-base-100 md:w-3/5 rounded-box shadow-md">
    
  <li className="p-4 pb-2 mb-6 text-3xl rounded-4xl bg-gradient-to-tr to-cyan-600 from-fuchsia-500 text-amber-50 text-center m-4 font-stretch-150% tracking-wide font-extralight">Requests</li>
 
