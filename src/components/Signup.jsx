@@ -70,9 +70,9 @@ const Signup = () => {
     }
 
 
-  return (<div className="flex justify-center mt-10 ">
+  return (<div className="flex flex-col md:flex-row justify-center mt-10 ">
       
-  <div className="mockup-code  bg-primary-content  w-full lg:w-1/2 p-4 lg:p-6 m-2 lg:m-10 2xl:w-2/6  ">
+  <div className="mockup-code  bg-primary-content  w-full md:w-1/2 lg:w-1/2 p-4 lg:p-6 m-2 lg:m-10 2xl:w-2/6  ">
   
     <pre data-prefix="$">
       <code>
@@ -82,7 +82,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , firstName: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6    text-green-600 input input-info"
+          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -94,7 +94,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , lastName: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 text-green-600 input input-info"
+          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -106,7 +106,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , emailId: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 text-green-600 input input-info"
+          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -118,7 +118,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , password: e.target.value})}
           type="password"
           placeholder="Info"
-          className="m-6 text-green-600 input input-info"
+          className="m-6 w-80 md:w-40 lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -130,7 +130,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , gender: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 text-green-600 input input-info"
+          className="m-6 w-80 md:w-40 lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -142,7 +142,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , age: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 text-green-600 input input-info"
+          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -158,7 +158,7 @@ const Signup = () => {
   
   type="text"
   placeholder="e.g. React, Node.js"
-  className="m-6 text-green-600 input input-info"
+  className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
 />
 
       </code>
@@ -171,7 +171,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , location: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 text-green-600 input input-info"
+          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -183,7 +183,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , about: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 text-green-600 input input-info"
+          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -195,7 +195,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , photoURL: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 text-green-600 input input-info"
+          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
       
@@ -205,10 +205,10 @@ const Signup = () => {
     { showToast &&  <Toast /> }
   </div>
 
-  <div className="hidden lg:flex flex-col items-center  mockup-phone">
+  <div className=" flex flex-col  items-center w-[430px]  m-auto md:m-0  mockup-phone h-1/2">
 <div className="mockup-phone-camera border  "></div>
 <div className="mockup-phone-display flex  justify-center p-2">
-<div className="w-full h-[90%]   overflow-hidden">
+<div className="w-full h-[90%] mt-6  overflow-hidden">
   
   <PhoneCard user={formData} />
   
