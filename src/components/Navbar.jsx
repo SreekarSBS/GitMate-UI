@@ -11,6 +11,7 @@ import { BsPeopleFill } from "react-icons/bs"
 import { MdPersonAdd } from "react-icons/md"
 
 
+
 const Navbar = () => {
  const navigate = useNavigate()
  const location = useLocation()
@@ -43,12 +44,12 @@ const Navbar = () => {
     
   ];
   
-  
+    
     return <div data-theme = "night" className="navbar bg-base-300  border-b border-b-cyan-500/55 rounded-2xl shadow-2xl ">
     <div className="flex-1 flex ">
-    <a onClick={feedRedirect}  class="btn btn-ghost h-26 text-5xl">
+    <a onClick={feedRedirect}  class="btn btn-ghost h-26 text-3xl md:text-5xl">
       
-<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="86" height="80" preserveAspectRatio="xMinYMin meet" viewBox="0 0 256 259.3" id="github">
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width={window.innerWidth <400 ? "56" :"80"} height={window.innerWidth <400 ? "56" :"75"} preserveAspectRatio="xMinYMin meet" viewBox="0 0 256 259.3" id="github">
   <path fill="#9EDCF2" d="M200.9 199.8c0 13.9-32.2 25.1-71.9 25.1s-71.9-11.3-71.9-25.1c0-13.9 32.2-25.1 71.9-25.1s71.9 11.2 71.9 25.1zm0 0"></path>
   <defs>
     <path id="a" d="M98.1 244.8c1.6 7.5 5.5 11.9 9.4 14.5h41.1c5-3.4 10.1-9.8 10.1-21.8v-31s.6-7.7 7.7-10.2c0 0 4.1-2.9-.3-4.5 0 0-19.5-1.6-19.5 14.4v23.6s.8 8.7-3.8 12.3v-29.2s.3-9.3 5.1-12.8c0 0 3.2-5.7-3.8-4.2 0 0-13.4 1.9-14 17.6l-.3 30h-3.2l-.3-30c-.6-15.6-14-17.6-14-17.6-7-1.6-3.8 4.2-3.8 4.2 4.8 3.5 5.1 12.8 5.1 12.8v29.5c-4.6-3.3-3.8-12.6-3.8-12.6v-23.6c0-16-19.5-14.4-19.5-14.4-4.5 1.6-.3 4.5-.3 4.5 7 2.6 7.7 10.2 7.7 10.2v21.7l.4 16.6z"></path>
@@ -76,8 +77,8 @@ const Navbar = () => {
     />
 </div></div>}
       </div>
-      {location.pathname === "/signup" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info w-28">Sign In</button>}
-     {location.pathname === "/auth" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info w-28">Sign In</button>}
+      {location.pathname === "/signup" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info  w-14 md:w-28">Sign In</button>}
+     {location.pathname === "/auth" && <button onClick={()=>navigate("/login",{state : {emailId : null}})} className="btn btn-info text-xs sm:text-sm w-14 md:w-28">Sign In</button>}
      {location.pathname === "/login" && <button onClick={()=>navigate("/signup",{state : {emailId : null}})} className="btn btn-info w-28">Sign Up</button>}
     
   {user && <div className="flex items-center"> 
