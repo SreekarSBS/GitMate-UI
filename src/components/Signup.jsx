@@ -82,7 +82,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , firstName: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
+          className="m-6 w-60 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -94,7 +94,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , lastName: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
+          className="m-6 w-60 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -106,7 +106,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , emailId: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
+          className="m-6 w-60 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -118,7 +118,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , password: e.target.value})}
           type="password"
           placeholder="Info"
-          className="m-6 w-80 md:w-40 lg:w-80 text-green-600 input input-info"
+          className="m-6 w-60 md:w-40 lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -130,7 +130,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , gender: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 w-80 md:w-40 lg:w-80 text-green-600 input input-info"
+          className="m-6 w-60 md:w-40 lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -142,7 +142,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , age: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
+          className="m-6 w-60 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -158,7 +158,7 @@ const Signup = () => {
   
   type="text"
   placeholder="e.g. React, Node.js"
-  className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
+  className="m-6 w-60 md:w-40  lg:w-80 text-green-600 input input-info"
 />
 
       </code>
@@ -171,7 +171,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , location: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
+          className="m-6 w-60 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -183,7 +183,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , about: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
+          className="m-6 w-60 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
     </pre>
@@ -195,7 +195,7 @@ const Signup = () => {
           onChange={(e) => setFormData({...formData , photoURL: e.target.value})}
           type="text"
           placeholder="Info"
-          className="m-6 w-80 md:w-40  lg:w-80 text-green-600 input input-info"
+          className="m-6 w-60 md:w-40  lg:w-80 text-green-600 input input-info"
         />
       </code>
       
