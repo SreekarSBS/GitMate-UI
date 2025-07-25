@@ -144,12 +144,19 @@ const Chat = () => {
       </div>
       <div  className="p-5 border-t flex items-center  border-gray-600 gap-2">
         <input
+        onKeyDown={(e) => {
+          if (e.key === "Enter" && !e.shiftKey) { // Shift+Enter for new line
+            e.preventDefault(); // Prevent default line break behavior
+            sendMessage();      // Call the send function
+          }
+        }}
          value={newMessage}
          onChange={(e) => setNewMessage(e.target.value)}
          className="overfow-scroll bg-base-200 flex-1 border border-gray-500 p-3 text-white h-full rounded-lg">
 
          </input>
         <button
+         
         onClick={sendMessage}
         className="btn btn-primary">
           Send
