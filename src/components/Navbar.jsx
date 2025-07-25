@@ -71,7 +71,7 @@ const Navbar = () => {
 
  </a>
 { user &&   <div className="hidden flex-1 relative lg:flex justify-center items-center">
-<div className="absolute ">
+<div className="absolute cursor-pointer ">
     <Dock
       items={items}  
     />
