@@ -54,9 +54,9 @@ catch(err){
 }
 
   return (
-    <div className="flex justify-center">
+    <div className="flex flex-col md:flex-row justify-center">
       
-      <div className="mockup-code bg-primary-content w-full lg:w-1/2 p-4 lg:p-6 m-2 lg:m-10 2xl:w-2/6 ">
+      <div className="mockup-code  bg-primary-content  m-auto md:w-1/2 lg:w-2/5 p-4 lg:p-6 md:m-2 lg:m-10   ">
       
         <pre data-prefix="$">
           <code>
@@ -66,7 +66,7 @@ catch(err){
               onChange={(e) => setFormData({...formData , firstName: e.target.value})}
               type="text"
               placeholder="Info"
-              className="m-6    text-green-600 input input-info"
+              className="m-6 w-50 md:w-40  lg:w-80    text-green-600 input input-info"
             />
           </code>
         </pre>
@@ -78,7 +78,7 @@ catch(err){
               onChange={(e) => setFormData({...formData , lastName: e.target.value})}
               type="text"
               placeholder="Info"
-              className="m-6 text-green-600 input input-info"
+              className="m-6 w-50 md:w-40  lg:w-80 text-green-600 input input-info"
             />
           </code>
         </pre>
@@ -90,7 +90,7 @@ catch(err){
               onChange={(e) => setFormData({...formData , gender: e.target.value})}
               type="text"
               placeholder="Info"
-              className="m-6 text-green-600 input input-info"
+              className="m-6 w-50 md:w-40  lg:w-80 text-green-600 input input-info"
             />
           </code>
         </pre>
@@ -102,7 +102,7 @@ catch(err){
               onChange={(e) => setFormData({...formData , age: e.target.value})}
               type="text"
               placeholder="Info"
-              className="m-6 text-green-600 input input-info"
+              className="m-6 w-50 md:w-40  lg:w-80 text-green-600 input input-info"
             />
           </code>
         </pre>
@@ -114,7 +114,7 @@ catch(err){
               onChange={(e) => setFormData({...formData , skills: e.target.value})}
               type="text"
               placeholder="Info"
-              className="m-6 text-green-600 input input-info"
+              className="m-6 w-50 md:w-40  lg:w-80 text-green-600 input input-info"
             />
           </code>
         </pre>
@@ -126,7 +126,7 @@ catch(err){
               onChange={(e) => setFormData({...formData , location: e.target.value})}
               type="text"
               placeholder="Info"
-              className="m-6 text-green-600 input input-info"
+              className="m-6 w-50 md:w-40  lg:w-80 text-green-600 input input-info"
             />
           </code>
         </pre>
@@ -138,7 +138,7 @@ catch(err){
               onChange={(e) => setFormData({...formData , about: e.target.value})}
               type="text"
               placeholder="Info"
-              className="m-6 text-green-600 input input-info"
+              className="m-6 w-50 md:w-40  lg:w-80 text-green-600 input input-info"
             />
           </code>
         </pre>
@@ -150,7 +150,7 @@ catch(err){
               onChange={(e) => setFormData({...formData , photoURL: e.target.value})}
               type="text"
               placeholder="Info"
-              className="m-6 text-green-600 input input-info"
+              className="m-6 w-50 md:w-40  lg:w-80 text-green-600 input input-info"
             />
           </code>
           
@@ -160,7 +160,7 @@ catch(err){
         { showToast &&  <Toast /> }
       </div>
 
-      <div className="hidden lg:flex flex-col items-center mockup-phone ">
+      <div className="  flex flex-col mt-6 md:mt-8  items-center w-[430px]  m-auto md:m-0  mockup-phone h-1/2">
   <div className="mockup-phone-camera border    "></div>
   <div className="mockup-phone-display flex  justify-center p-2">
     <div className="w-full h-[90%]   overflow-hidden">

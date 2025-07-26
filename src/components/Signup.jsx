@@ -72,7 +72,7 @@ const Signup = () => {
 
   return (<div className="flex flex-col md:flex-row justify-center mt-10 ">
       
-  <div className="mockup-code  bg-primary-content  m-auto md:w-1/2 lg:w-1/2 p-4 lg:p-6 md:m-2 lg:m-10 2xl:w-2/6  ">
+  <div className="mockup-code  bg-primary-content  m-auto md:w-1/2 lg:w-2/5 p-4 lg:p-6 md:m-2 lg:m-10  ">
   
     <pre data-prefix="$">
       <code>
@@ -205,7 +205,7 @@ const Signup = () => {
     { showToast &&  <Toast /> }
   </div>
 
-  <div className=" flex flex-col mt-6 md:mt-0  items-center w-[430px]  m-auto md:m-0  mockup-phone h-1/2">
+  <div className=" flex flex-col mt-6 md:mt-8  items-center w-[430px]  m-auto md:m-0  mockup-phone h-1/2">
 <div className="mockup-phone-camera border  "></div>
 <div className="mockup-phone-display flex  justify-center p-2">
 <div className="w-full h-[90%] mt-6  overflow-hidden">
