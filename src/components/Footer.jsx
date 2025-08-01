@@ -23,7 +23,7 @@ const Footer = () => {
     <Link to='/contact' className="link link-hover">Contact Us</Link>
   </nav>
     <nav className="grid-flow-col gap-4 md:place-self-center md:justify-self-end">
-    <a href="https://github.com/SreekarSBS" target="_blank" rel="noopener noreferrer">
+    <a href="https://github.com/SreekarSBS/GitMate" target="_blank" rel="noopener noreferrer">
     <svg
       xmlns="http://www.w3.org/2000/svg"
       x="0px"
